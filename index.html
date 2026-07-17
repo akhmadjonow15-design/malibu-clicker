@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Malibu Clicker - Ro'yxatdan o'tish</title>
-    <!-- Telegram WebApp Script ulanmoqda -->
+    <title>Malibu Clicker PRO</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         * {
@@ -14,7 +13,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0d0d13, #1a1a2e);
+            background: linear-gradient(135deg, #0a0a0f, #141420);
             color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
@@ -27,7 +26,7 @@
             -webkit-user-select: none;
         }
 
-        /* 1. RO'YXATDAN O'TISh EKRANI */
+        /* RO'YXATDAN O'TISH */
         #authScreen {
             display: flex;
             flex-direction: column;
@@ -39,192 +38,314 @@
             height: 100%;
         }
 
+        .auth-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px 20px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 90%;
+            max-width: 340px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
         .auth-logo {
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, #ffd700 0%, transparent 70%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 50px;
-            margin-bottom: 25px;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            font-size: 60px;
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         .auth-title {
             font-size: 24px;
             font-weight: bold;
-            margin-bottom: 10px;
             color: #ffd700;
+            margin-bottom: 10px;
         }
 
-        .auth-desc {
-            font-size: 14px;
-            color: #a0a0b8;
-            margin-bottom: 30px;
-            max-width: 280px;
-            line-height: 1.5;
+        .auth-input {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            background: rgba(0,0,0,0.3);
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 20px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .auth-input:focus {
+            border-color: #ffd700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
         }
 
         .auth-btn {
             background: linear-gradient(90deg, #ffd700, #ffa500);
             color: black;
             border: none;
-            padding: 15px 40px;
+            padding: 14px;
             font-size: 16px;
             font-weight: bold;
-            border-radius: 30px;
+            border-radius: 12px;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
-            transition: transform 0.1s;
-            width: 85%;
-            max-width: 300px;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
         }
 
-        .auth-btn:active {
-            transform: scale(0.96);
-        }
-
-        /* 2. ASOSIY O'YIN EKRANI */
+        /* O'YIN EKRANI */
         #gameScreen {
-            display: none; /* Boshida yashirin turadi */
+            display: none;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
             width: 100%;
             height: 100%;
-            padding: 25px 0;
+            padding: 20px 0;
         }
 
-        .user-welcome {
+        /* TEPADAGI LEVEL VA PROGRESS BAR */
+        .top-bar {
+            width: 90%;
+            max-width: 360px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .user-info-row {
+            display: flex;
+            justify-content: space-between;
             font-size: 14px;
-            color: #00ffcc;
-            background: rgba(0, 255, 204, 0.1);
-            padding: 6px 16px;
-            border-radius: 20px;
-            border: 1px solid rgba(0, 255, 204, 0.2);
+            font-weight: bold;
         }
 
+        .level-text {
+            color: #00ffcc;
+        }
+
+        .nickname-text {
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #00ffcc, #0099ff);
+            border-radius: 6px;
+            transition: width 0.1s ease;
+        }
+
+        .progress-percent {
+            font-size: 11px;
+            color: #a0a0b8;
+            text-align: right;
+            margin-top: 2px;
+        }
+
+        /* BALANS */
         .score-container {
             text-align: center;
-            margin-top: 10px;
+        }
+
+        .score-title {
+            font-size: 12px;
+            color: #a0a0b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .score {
-            font-size: 55px;
+            font-size: 50px;
             font-weight: bold;
             color: #ffd700;
-            text-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
         }
 
-        /* DUMALOQ BOSISh MAYDONI */
-        .circle-container {
-            position: relative;
-            width: 270px;
-            height: 270px;
-            background: radial-gradient(circle, #1a1a2e, #0a0a0f);
+        /* ORTADAGI DUMALOQ VA MALIBU */
+        .circle-outer {
+            width: 260px;
+            height: 260px;
+            background: radial-gradient(circle, #1a1a2e, #07070a);
             border-radius: 50%;
-            border: 5px solid #ffd700;
-            box-shadow: 0 0 35px rgba(255, 215, 0, 0.4), inset 0 0 20px rgba(255, 215, 0, 0.2);
+            border: 6px solid #ffd700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3), inset 0 0 20px rgba(255, 215, 0, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: transform 0.05s ease;
-            overflow: hidden;
+            position: relative;
+        }
+
+        .circle-text {
+            position: absolute;
+            bottom: 20px;
+            font-size: 11px;
+            color: rgba(255, 215, 0, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            pointer-events: none;
         }
 
         .malibu-img {
-            width: 90%;
+            width: 85%;
             height: auto;
-            z-index: 2;
             pointer-events: none;
             -webkit-user-drag: none;
         }
 
-        /* DO'KON BO'LIMI */
+        /* DO'KON */
         .shop-container {
             width: 90%;
             max-width: 360px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 15px;
+            border-radius: 16px;
+            padding: 12px;
         }
 
         .shop-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 12px 15px;
-            border-radius: 14px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 14px;
+            border-radius: 12px;
         }
 
-        .item-name { font-size: 14px; font-weight: bold; }
-        .item-desc { font-size: 11px; color: #a0a0b8; margin-top: 2px;}
+        .item-title { font-size: 14px; font-weight: bold; }
+        .item-desc { font-size: 11px; color: #a0a0b8; }
 
         .buy-btn {
             background: linear-gradient(90deg, #00ffcc, #0099ff);
             border: none;
             color: black;
-            padding: 10px 18px;
+            padding: 8px 16px;
             font-weight: bold;
-            border-radius: 10px;
-            cursor: pointer;
+            border-radius: 8px;
             font-size: 13px;
+            cursor: pointer;
         }
 
-        /* UCHIB CHIQUVChI +1 EFFEKTI */
+        /* EFFEKT MATNI */
         .floating-text {
             position: absolute;
-            font-size: 35px;
+            font-size: 32px;
             font-weight: bold;
             color: #ffd700;
             pointer-events: none;
             z-index: 10;
-            animation: floatUp 0.5s ease-out forwards;
-            text-shadow: 0 3px 6px rgba(0,0,0,0.6);
+            animation: floatUp 0.4s ease-out forwards;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
         }
 
         @keyframes floatUp {
             0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-130px) scale(1.2); }
+            100% { opacity: 0; transform: translateY(-110px) scale(1.2); }
         }
+
+        /* MAXFIY ADMIN PANEL MODAL */
+        #adminModal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .admin-card {
+            background: #1c1c28;
+            border: 2px solid #00ffcc;
+            border-radius: 20px;
+            padding: 20px;
+            width: 85%;
+            max-width: 320px;
+            text-align: center;
+        }
+
+        .admin-card h3 { color: #00ffcc; margin-bottom: 15px; font-size: 18px; }
+        .admin-input {
+            width: 100%; padding: 10px; margin-bottom: 12px;
+            border-radius: 8px; border: 1px solid #444;
+            background: #000; color: white; text-align: center;
+        }
+        .admin-btn {
+            width: 100%; padding: 12px; border: none; border-radius: 8px;
+            background: #00ffcc; color: black; font-weight: bold; margin-bottom: 8px;
+            cursor: pointer;
+        }
+        .close-admin { color: #a0a0b8; font-size: 13px; cursor: pointer; text-decoration: underline; }
     </style>
 </head>
 <body>
 
-    <!-- 1. RO'YXATDAN O'TISh SOHASI -->
+    <!-- 1. RO'YXATDAN O'TISH EKRANI -->
     <div id="authScreen">
-        <div class="auth-logo">🏎</div>
-        <div class="auth-title">Malibu Clicker PRO</div>
-        <div class="auth-desc">O'yinga kirish va hisobingizni Telegram profilingizga biriktirish uchun ro'yxatdan o'ting!</div>
-        <button class="auth-btn" onclick="startRegistration()">🚀 RO'YXATDAN O'TISH</button>
+        <div class="auth-card">
+            <div class="auth-logo">🏎</div>
+            <div class="auth-title">Malibu Clicker</div>
+            <div style="color: #a0a0b8; font-size: 13px; margin-bottom: 20px;">O'yindagi nikingizni kiriting:</div>
+            <input type="text" id="nikInput" class="auth-input" placeholder="Nikni yozing..." maxlength="15">
+            <button class="auth-btn" onclick="registerUser()">KIRISH 🚀</button>
+        </div>
     </div>
 
-    <!-- 2. HAQIQIY O'YIN SOHASI -->
+    <!-- 2. ASOSIY O'YIN EKRANI -->
     <div id="gameScreen">
-        <!-- Foydalanuvchi nomi chiqadigan joy -->
-        <div class="user-welcome" id="userWelcome">Salom, Haydovchi!</div>
+        <!-- Yuqori qism: Level va Progress Bar -->
+        <div class="top-bar">
+            <div class="user-info-row">
+                <span class="nickname-text" id="displayNik" onclick="tryOpenAdmin()">Nik: -</span>
+                <span class="level-text" id="displayLevel">Daraja: 1</span>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="progress-percent" id="progressPercent">0% (0 / 1000)</div>
+        </div>
 
         <!-- Balans -->
         <div class="score-container">
-            <div style="font-size: 13px; color: #a0a0b8; text-transform: uppercase; letter-spacing: 1px;">Balans</div>
+            <div class="score-title">Balans</div>
             <div class="score" id="scoreDisplay">0</div>
         </div>
 
-        <!-- DUMALOQ ICHIDAGI MALIBU 2 -->
-        <div class="circle-container" id="clickArea">
+        <!-- O'rtadagi dumaloq va Malibu moshinasi -->
+        <div class="circle-outer" id="clickArea">
             <img src="https://i.postimg.cc/D0Yg06g4/malibu.png" alt="Malibu 2" class="malibu-img">
+            <div class="circle-text">SHU YERGA BOSING</div>
         </div>
 
-        <!-- Upgrade qismi -->
+        <!-- Upgrade do'koni -->
         <div class="shop-container">
             <div class="shop-item">
                 <div>
-                    <div class="item-name">🚀 Moshniy Motor</div>
+                    <div class="item-title">🚀 Moshniy Motor</div>
                     <div class="item-desc">Har klikda +1 tanga ko'p beradi</div>
                 </div>
                 <button class="buy-btn" id="motorBtn">50 💰</button>
@@ -232,69 +353,102 @@
         </div>
     </div>
 
+    <!-- 3. MAXFIY ADMIN PANEL MODAL -->
+    <div id="adminModal">
+        <div class="admin-card">
+            <h3>🛠 MAXFIY ADMIN PANEL</h3>
+            <div id="adminAuthSection">
+                <input type="password" id="adminPassword" class="admin-input" placeholder="Parolni kiriting...">
+                <button class="admin-btn" onclick="checkAdminPassword()">KIRISH</button>
+            </div>
+            <div id="adminControlsSection" style="display: none;">
+                <p style="font-size:12px; color:#a0a0b8; margin-bottom:10px;">Nik orqali tanga va daraja berish</p>
+                <input type="text" id="targetNik" class="admin-input" placeholder="Foydalanuvchi niki...">
+                <input type="number" id="addCoinsAmount" class="admin-input" placeholder="Qancha tanga qo'shish...">
+                <input type="number" id="addLevelAmount" class="admin-input" placeholder="Qancha daraja qo'shish...">
+                <button class="admin-btn" onclick="applyAdminChanges()">TIZIMGA QO'SHISH</button>
+            </div>
+            <div class="close-admin" onclick="closeAdminModal()">Yopish</div>
+        </div>
+    </div>
+
     <script>
-        // Telegram WebApp obyektini tekshirish
         const tg = window.Telegram.WebApp;
-        tg.expand(); // O'yinni silliq qilib to'liq ekranda ochadi
+        if(tg) tg.expand();
 
-        // Har bir foydalanuvchi uchun uning tg_id si bo'yicha kalit ochamiz
-        const userId = tg.initDataUnsafe?.user?.id || "guest_user";
-        const firstName = tg.initDataUnsafe?.user?.first_name || "Dasturchi";
+        const userId = tg.initDataUnsafe?.user?.id || "guest_player";
 
-        // Kalit so'zlar har bir odam uchun alohida bo'ladi
-        const scoreKey = `malibu_score_${userId}`;
-        const powerKey = `malibu_power_${userId}`;
-        const costKey = `malibu_cost_${userId}`;
-        const authKey = `malibu_auth_${userId}`;
+        const keyPrefix = `mb_${userId}_`;
+        let userNickname = localStorage.getItem(keyPrefix + 'nik') || "";
+        let score = parseInt(localStorage.getItem(keyPrefix + 'score')) || 0;
+        let clickPower = parseInt(localStorage.getItem(keyPrefix + 'power')) || 1;
+        let motorCost = parseInt(localStorage.getItem(keyPrefix + 'cost')) || 50;
+        let totalClicks = parseInt(localStorage.getItem(keyPrefix + 'clicks')) || 0;
+        let level = parseInt(localStorage.getItem(keyPrefix + 'level')) || 1;
 
-        // Ma'lumotlarni yuklash
-        let score = parseInt(localStorage.getItem(scoreKey)) || 0;
-        let clickPower = parseInt(localStorage.getItem(powerKey)) || 1;
-        let motorCost = parseInt(localStorage.getItem(costKey)) || 50;
-        let isRegistered = localStorage.getItem(authKey) === 'true';
+        const clicksPerLevel = 1000;
 
-        // Elementlarni chaqirib olish
         const authScreen = document.getElementById('authScreen');
         const gameScreen = document.getElementById('gameScreen');
+        const displayNik = document.getElementById('displayNik');
+        const displayLevel = document.getElementById('displayLevel');
+        const progressBar = document.getElementById('progressBar');
+        const progressPercent = document.getElementById('progressPercent');
         const scoreDisplay = document.getElementById('scoreDisplay');
-        const userWelcome = document.getElementById('userWelcome');
         const clickArea = document.getElementById('clickArea');
         const motorBtn = document.getElementById('motorBtn');
+        const adminModal = document.getElementById('adminModal');
 
-        // Agar odam oldin ro'yxatdan o'tgan bo'lsa, birdan o'yinga o'tkazamiz
-        if (isRegistered) {
-            showGame();
+        if (userNickname) {
+            initGame();
         }
 
-        function startRegistration() {
-            // Ro'yxatdan o'tganini eslab qolamiz
-            localStorage.setItem(authKey, 'true');
-            showGame();
+        function registerUser() {
+            const input = document.getElementById('nikInput').value.trim();
+            if (!input) {
+                alert("Iltimos, nik yozing!");
+                return;
+            }
+            userNickname = input;
+            localStorage.setItem(keyPrefix + 'nik', userNickname);
+            initGame();
         }
 
-        function showGame() {
+        function initGame() {
             authScreen.style.display = 'none';
             gameScreen.style.display = 'flex';
-            userWelcome.textContent = `Haydovchi: ${firstName}`;
+            displayNik.textContent = `Nik: ${userNickname}`;
             updateUI();
         }
 
         function updateUI() {
             scoreDisplay.textContent = score;
+            displayLevel.textContent = `Daraja: ${level}`;
             motorBtn.textContent = motorCost + " 💰";
+
+            let currentLevelClicks = totalClicks % clicksPerLevel;
+            let percent = Math.floor((currentLevelClicks / clicksPerLevel) * 100);
+            
+            progressBar.style.width = percent + "%";
+            progressPercent.textContent = `${percent}% (${currentLevelClicks} / ${clicksPerLevel})`;
         }
 
-        // DUMALOQNI BOSGANDA TANGALAR CHIQARISh
         function handleTap(clientX, clientY) {
             score += clickPower;
-            scoreDisplay.textContent = score;
-            localStorage.setItem(scoreKey, score);
+            totalClicks += 1;
 
-            // Dumaloqni effekt uchun bir oz qisqartirish
+            let newLevel = Math.floor(totalClicks / clicksPerLevel) + 1;
+            if (newLevel > level) {
+                level = newLevel;
+                if(tg) tg.HapticFeedback?.notificationOccurred('success');
+            }
+
+            saveData();
+            updateUI();
+
             clickArea.style.transform = 'scale(0.95)';
             setTimeout(() => { clickArea.style.transform = 'scale(1)'; }, 50);
 
-            // Klik koordinatasi boyicha +1 text chiqarish
             const rect = clickArea.getBoundingClientRect();
             const x = clientX - rect.left;
             const y = clientY - rect.top;
@@ -306,7 +460,7 @@
             floatText.style.top = `${y}px`;
 
             clickArea.appendChild(floatText);
-            setTimeout(() => { floatText.remove(); }, 500);
+            setTimeout(() => { floatText.remove(); }, 400);
         }
 
         clickArea.addEventListener('touchstart', (e) => {
@@ -319,23 +473,79 @@
             handleTap(e.clientX, e.clientY);
         });
 
-        // MOTOR SOTIB OLISh
+        // MOTOR SOTIB OLISH
         motorBtn.addEventListener('click', () => {
             if (score >= motorCost) {
                 score -= motorCost;
                 clickPower += 1;
-                motorCost = Math.floor(motorCost * 2); // Keyingi safar 2 barobar qimmatlashadi
-                
-                localStorage.setItem(scoreKey, score);
-                localStorage.setItem(powerKey, clickPower);
-                localStorage.setItem(costKey, motorCost);
-                
+                motorCost = Math.floor(motorCost * 1.8);
+                saveData();
                 updateUI();
             } else {
-                tg.showAlert("Tangalaringiz yetarli emas! 🏎💨");
+                if(tg) tg.showAlert("Tangalaringiz yetarli emas! 🏎💨");
+                else alert("Tangalaringiz yetarli emas! 🏎💨");
             }
         });
+
+        function saveData() {
+            localStorage.setItem(keyPrefix + 'score', score);
+            localStorage.setItem(keyPrefix + 'power', clickPower);
+            localStorage.setItem(keyPrefix + 'cost', motorCost);
+            localStorage.setItem(keyPrefix + 'clicks', totalClicks);
+            localStorage.setItem(keyPrefix + 'level', level);
+        }
+
+        // --- ADMIN PANEL ---
+        let clickCountOnNik = 0;
+        function tryOpenAdmin() {
+            clickCountOnNik++;
+            if (clickCountOnNik >= 5) {
+                clickCountOnNik = 0;
+                adminModal.style.display = 'flex';
+                document.getElementById('adminAuthSection').style.display = 'block';
+                document.getElementById('adminControlsSection').style.display = 'none';
+                document.getElementById('adminPassword').value = '';
+            }
+        }
+
+        function checkAdminPassword() {
+            const pass = document.getElementById('adminPassword').value;
+            if (pass === '1506.2011') {
+                document.getElementById('adminAuthSection').style.display = 'none';
+                document.getElementById('adminControlsSection').style.display = 'block';
+            } else {
+                alert("Xato parol!");
+                closeAdminModal();
+            }
+        }
+
+        function applyAdminChanges() {
+            const target = document.getElementById('targetNik').value.trim();
+            const addCoins = parseInt(document.getElementById('addCoinsAmount').value) || 0;
+            const addLvl = parseInt(document.getElementById('addLevelAmount').value) || 0;
+
+            if (!target) {
+                alert("Nikni kiriting!");
+                return;
+            }
+
+            if (target.toLowerCase() === userNickname.toLowerCase()) {
+                score += addCoins;
+                level += addLvl;
+                totalClicks += addLvl * clicksPerLevel; 
+                saveData();
+                updateUI();
+                alert(`Muvaffaqiyatli! ${target} nikiga ${addCoins} tanga va ${addLvl} daraja qo'shildi!`);
+            } else {
+                alert("Foydalanuvchi topilmadi! (Faqat o'z nikingizda sinab ko'ring)");
+            }
+            closeAdminModal();
+        }
+
+        function closeAdminModal() {
+            adminModal.style.display = 'none';
+        }
     </script>
 </body>
-    </html>
+                    </html>
     
