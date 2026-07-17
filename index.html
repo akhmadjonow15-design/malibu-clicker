@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Malibu Clicker</title>
+    <title>Malibu Clicker PRO</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #1e1e2f, #0f0f1a);
+            background: linear-gradient(135deg, #14141f, #08080f);
             color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             height: 100vh;
+            box-sizing: border-box;
+            padding: 20px 0;
             overflow: hidden;
             user-select: none;
             -webkit-user-select: none;
@@ -23,18 +25,18 @@
 
         .score-container {
             text-align: center;
-            margin-bottom: 20px;
+            margin-top: 10px;
         }
 
         .score {
-            font-size: 48px;
+            font-size: 52px;
             font-weight: bold;
             color: #ffd700;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
         }
 
         .title {
-            font-size: 18px;
+            font-size: 14px;
             color: #a0a0b8;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -42,21 +44,20 @@
 
         .click-area {
             position: relative;
-            width: 280px;
-            height: 280px;
+            width: 300px;
+            height: 300px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
         }
 
-        /* Doiraviy effekt */
         .click-area::before {
             content: '';
             position: absolute;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(255,215,0,0.15) 0%, rgba(0,0,0,0) 70%);
+            background: radial-gradient(circle, rgba(255,215,0,0.12) 0%, rgba(0,0,0,0) 70%);
             border-radius: 50%;
             z-index: 1;
         }
@@ -65,101 +66,229 @@
             width: 100%;
             height: auto;
             z-index: 2;
-            transition: transform 0.05s ease;
+            transition: transform 0.05s ease, filter 0.3s ease;
             -webkit-user-drag: none;
         }
 
-        .malibu-img:active {
+        /* Do'kon bo'limi */
+        .shop-container {
+            width: 90%;
+            max-width: 360px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 15px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        .shop-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #00ffcc;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .shop-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 12px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+        }
+
+        .item-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item-name {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .item-desc {
+            font-size: 11px;
+            color: #a0a0b8;
+        }
+
+        .buy-btn {
+            background: linear-gradient(90deg, #00ffcc, #0099ff);
+            border: none;
+            color: black;
+            padding: 8px 14px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: transform 0.1s;
+        }
+
+        .buy-btn:active {
             transform: scale(0.95);
         }
 
-        /* Bosgandagi +1 effekti */
+        .buy-btn.maxed {
+            background: #444;
+            color: #888;
+            cursor: not-allowed;
+        }
+
         .floating-text {
             position: absolute;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
             color: #ffd700;
             pointer-events: none;
             z-index: 10;
-            animation: floatUp 0.6s ease-out forwards;
+            animation: floatUp 0.5s ease-out forwards;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         @keyframes floatUp {
-            0% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-100px) scale(1.2);
-            }
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-120px) scale(1.3); }
         }
     </style>
 </head>
 <body>
 
+    <!-- Hisoblagich -->
     <div class="score-container">
-        <div class="title">Sening Tangalaring</div>
+        <div class="title">Balans</div>
         <div class="score" id="scoreDisplay">0</div>
+        <div style="font-size: 12px; color: #00ffcc; margin-top: 5px;">Bosganda: +<span id="clickPowerDisplay">1</span></div>
     </div>
 
-    <!-- Kliklash maydoni -->
+    <!-- Malibu 2 bosish maydoni -->
     <div class="click-area" id="clickArea">
-        <!-- Bu yerga Malibu 2 moshinasi rasmi chiqadi -->
         <img src="https://i.postimg.cc/D0Yg06g4/malibu.png" alt="Malibu 2" class="malibu-img" id="malibuImg">
     </div>
 
+    <!-- Upgrade Do'koni -->
+    <div class="shop-container">
+        <div class="shop-title">🏎 TUNING DO'KONI</div>
+        
+        <!-- 1-Narsa: Motorni kuchaytirish -->
+        <div class="shop-item">
+            <div class="item-info">
+                <span class="item-name">🚀 Moshniy Motor</span>
+                <span class="item-desc">Har bir klikka +1 tanga</span>
+            </div>
+            <button class="buy-btn" id="motorBtn">50 💰</button>
+        </div>
+
+        <!-- 2-Narsa: Qora Tuning rang -->
+        <div class="shop-item">
+            <div class="item-info">
+                <span class="item-name">⚫ Qora Tonirovka</span>
+                <span class="item-desc">Malibuni qoraytirish</span>
+            </div>
+            <button class="buy-btn" id="tintBtn">500 💰</button>
+        </div>
+    </div>
+
     <script>
-        let score = parseInt(localStorage.getItem('malibu_score')) || 0;
+        // Ma'lumotlarni xotiradan yuklash yoki noldan boshlash
+        let score = parseInt(localStorage.getItem('m_score')) || 0;
+        let clickPower = parseInt(localStorage.getItem('m_power')) || 1;
+        let isTinted = localStorage.getItem('m_tinted') === 'true';
+
+        let motorCost = parseInt(localStorage.getItem('m_motor_cost')) || 50;
+
         const scoreDisplay = document.getElementById('scoreDisplay');
+        const clickPowerDisplay = document.getElementById('clickPowerDisplay');
         const clickArea = document.getElementById('clickArea');
         const malibuImg = document.getElementById('malibuImg');
+        
+        const motorBtn = document.getElementById('motorBtn');
+        const tintBtn = document.getElementById('tintBtn');
 
-        // Boshlang'ich ochkodni ekranga chiqarish
-        scoreDisplay.textContent = score;
-
-        clickArea.addEventListener('touchstart', (e) => {
-            e.preventDefault(); // Ekran silkinib ketmasligi uchun
-            handleCreateCoin(e.touches[0].clientX, e.touches[0].clientY);
-        });
-
-        clickArea.addEventListener('mousedown', (e) => {
-            // Agar sichqoncha bilan bosilsa (kompyuterda sinash uchun)
-            if (e.type === 'mousedown' && 'ontouchstart' in window) return;
-            handleCreateCoin(e.clientX, e.clientY);
-        });
-
-        function handleCreateCoin(clientX, clientY) {
-            // Ochkoni oshirish
-            score++;
+        // Boshlang'ich vizual sozlashlar
+        function updateUI() {
             scoreDisplay.textContent = score;
-            localStorage.setItem('malibu_score', score);
+            clickPowerDisplay.textContent = clickPower;
+            motorBtn.textContent = motorCost + " 💰";
+            
+            if (isTinted) {
+                malibuImg.style.filter = "brightness(0.4) contrast(1.2)";
+                tintBtn.textContent = "SOTIB OLINGAN";
+                tintBtn.classList.add('maxed');
+            } else {
+                tintBtn.textContent = "500 💰";
+            }
+        }
+        updateUI();
 
-            // Moshinani ozgina kichraytirish (effekt)
-            malibuImg.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                malibuImg.style.transform = 'scale(1)';
-            }, 50);
+        // KLIK QILISh FUNKSIYASI
+        function handleCreateCoin(clientX, clientY) {
+            score += clickPower;
+            scoreDisplay.textContent = score;
+            localStorage.setItem('m_score', score);
 
-            // +1 matnini yaratish va bosilgan joyga qo'yish
+            malibuImg.style.transform = 'scale(0.94)';
+            setTimeout(() => { malibuImg.style.transform = 'scale(1)'; }, 50);
+
             const rect = clickArea.getBoundingClientRect();
             const x = clientX - rect.left;
             const y = clientY - rect.top;
 
             const floatText = document.createElement('div');
             floatText.className = 'floating-text';
-            floatText.textContent = '+1';
+            floatText.textContent = '+' + clickPower;
             floatText.style.left = `${x}px`;
             floatText.style.top = `${y}px`;
 
             clickArea.appendChild(floatText);
-
-            // Effekt tugagach o'chirib tashlash
-            setTimeout(() => {
-                floatText.remove();
-            }, 600);
+            setTimeout(() => { floatText.remove(); }, 500);
         }
+
+        clickArea.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            handleCreateCoin(e.touches[0].clientX, e.touches[0].clientY);
+        });
+
+        clickArea.addEventListener('mousedown', (e) => {
+            if (e.type === 'mousedown' && 'ontouchstart' in window) return;
+            handleCreateCoin(e.clientX, e.clientY);
+        });
+
+        // MOTOR UPGRADE SOTIB OLISh
+        motorBtn.addEventListener('click', () => {
+            if (score >= motorCost) {
+                score -= motorCost;
+                clickPower += 1;
+                motorCost = Math.floor(motorCost * 1.8); // Narx oshadi
+                
+                localStorage.setItem('m_score', score);
+                localStorage.setItem('m_power', clickPower);
+                localStorage.setItem('m_motor_cost', motorCost);
+                
+                updateUI();
+            } else {
+                alert("Tangalaringiz yetarli emas! 🏎💨");
+            }
+        });
+
+        // TONIROVKA SOTIB OLISh
+        tintBtn.addEventListener('click', () => {
+            if (isTinted) return;
+            if (score >= 500) {
+                score -= 500;
+                isTinted = true;
+                
+                localStorage.setItem('m_score', score);
+                localStorage.setItem('m_tinted', 'true');
+                
+                updateUI();
+            } else {
+                alert("Tonirovka uchun 500 ta tanga kerak! 💰");
+            }
+        });
     </script>
 </body>
-  </html>
-  
+</html>
