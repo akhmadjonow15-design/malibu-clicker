@@ -3,24 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Malibu Clicker PRO</title>
+    <title>Malibu Clicker - Ro'yxatdan o'tish</title>
+    <!-- Telegram WebApp Script ulanmoqda -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #14141f, #08080f);
+        }
+
+        body {
+            background: linear-gradient(135deg, #0d0d13, #1a1a2e);
             color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             height: 100vh;
-            box-sizing: border-box;
-            padding: 20px 0;
             overflow: hidden;
             user-select: none;
             -webkit-user-select: none;
+        }
+
+        /* 1. RO'YXATDAN O'TISh EKRANI */
+        #authScreen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .auth-logo {
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, #ffd700 0%, transparent 70%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .auth-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        .auth-desc {
+            font-size: 14px;
+            color: #a0a0b8;
+            margin-bottom: 30px;
+            max-width: 280px;
+            line-height: 1.5;
+        }
+
+        .auth-btn {
+            background: linear-gradient(90deg, #ffd700, #ffa500);
+            color: black;
+            border: none;
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+            transition: transform 0.1s;
+            width: 85%;
+            max-width: 300px;
+        }
+
+        .auth-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* 2. ASOSIY O'YIN EKRANI */
+        #gameScreen {
+            display: none; /* Boshida yashirin turadi */
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+            padding: 25px 0;
+        }
+
+        .user-welcome {
+            font-size: 14px;
+            color: #00ffcc;
+            background: rgba(0, 255, 204, 0.1);
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 204, 0.2);
         }
 
         .score-container {
@@ -29,210 +112,189 @@
         }
 
         .score {
-            font-size: 52px;
+            font-size: 55px;
             font-weight: bold;
             color: #ffd700;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            text-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
         }
 
-        .title {
-            font-size: 14px;
-            color: #a0a0b8;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .click-area {
+        /* DUMALOQ BOSISh MAYDONI */
+        .circle-container {
             position: relative;
-            width: 300px;
-            height: 300px;
+            width: 270px;
+            height: 270px;
+            background: radial-gradient(circle, #1a1a2e, #0a0a0f);
+            border-radius: 50%;
+            border: 5px solid #ffd700;
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.4), inset 0 0 20px rgba(255, 215, 0, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-        }
-
-        .click-area::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255,215,0,0.12) 0%, rgba(0,0,0,0) 70%);
-            border-radius: 50%;
-            z-index: 1;
+            transition: transform 0.05s ease;
+            overflow: hidden;
         }
 
         .malibu-img {
-            width: 100%;
+            width: 90%;
             height: auto;
             z-index: 2;
-            transition: transform 0.05s ease, filter 0.3s ease;
+            pointer-events: none;
             -webkit-user-drag: none;
         }
 
-        /* Do'kon bo'limi */
+        /* DO'KON BO'LIMI */
         .shop-container {
             width: 90%;
             max-width: 360px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
             padding: 15px;
-            box-sizing: border-box;
-            margin-bottom: 10px;
-        }
-
-        .shop-title {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #00ffcc;
-            text-align: center;
-            text-transform: uppercase;
         }
 
         .shop-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 10px 12px;
-            border-radius: 10px;
-            margin-bottom: 8px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 12px 15px;
+            border-radius: 14px;
         }
 
-        .item-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .item-name {
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .item-desc {
-            font-size: 11px;
-            color: #a0a0b8;
-        }
+        .item-name { font-size: 14px; font-weight: bold; }
+        .item-desc { font-size: 11px; color: #a0a0b8; margin-top: 2px;}
 
         .buy-btn {
             background: linear-gradient(90deg, #00ffcc, #0099ff);
             border: none;
             color: black;
-            padding: 8px 14px;
+            padding: 10px 18px;
             font-weight: bold;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 13px;
-            transition: transform 0.1s;
         }
 
-        .buy-btn:active {
-            transform: scale(0.95);
-        }
-
-        .buy-btn.maxed {
-            background: #444;
-            color: #888;
-            cursor: not-allowed;
-        }
-
+        /* UCHIB CHIQUVChI +1 EFFEKTI */
         .floating-text {
             position: absolute;
-            font-size: 32px;
+            font-size: 35px;
             font-weight: bold;
             color: #ffd700;
             pointer-events: none;
             z-index: 10;
             animation: floatUp 0.5s ease-out forwards;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 0 3px 6px rgba(0,0,0,0.6);
         }
 
         @keyframes floatUp {
             0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-120px) scale(1.3); }
+            100% { opacity: 0; transform: translateY(-130px) scale(1.2); }
         }
     </style>
 </head>
 <body>
 
-    <!-- Hisoblagich -->
-    <div class="score-container">
-        <div class="title">Balans</div>
-        <div class="score" id="scoreDisplay">0</div>
-        <div style="font-size: 12px; color: #00ffcc; margin-top: 5px;">Bosganda: +<span id="clickPowerDisplay">1</span></div>
+    <!-- 1. RO'YXATDAN O'TISh SOHASI -->
+    <div id="authScreen">
+        <div class="auth-logo">🏎</div>
+        <div class="auth-title">Malibu Clicker PRO</div>
+        <div class="auth-desc">O'yinga kirish va hisobingizni Telegram profilingizga biriktirish uchun ro'yxatdan o'ting!</div>
+        <button class="auth-btn" onclick="startRegistration()">🚀 RO'YXATDAN O'TISH</button>
     </div>
 
-    <!-- Malibu 2 bosish maydoni -->
-    <div class="click-area" id="clickArea">
-        <img src="https://i.postimg.cc/D0Yg06g4/malibu.png" alt="Malibu 2" class="malibu-img" id="malibuImg">
-    </div>
+    <!-- 2. HAQIQIY O'YIN SOHASI -->
+    <div id="gameScreen">
+        <!-- Foydalanuvchi nomi chiqadigan joy -->
+        <div class="user-welcome" id="userWelcome">Salom, Haydovchi!</div>
 
-    <!-- Upgrade Do'koni -->
-    <div class="shop-container">
-        <div class="shop-title">🏎 TUNING DO'KONI</div>
-        
-        <!-- 1-Narsa: Motorni kuchaytirish -->
-        <div class="shop-item">
-            <div class="item-info">
-                <span class="item-name">🚀 Moshniy Motor</span>
-                <span class="item-desc">Har bir klikka +1 tanga</span>
-            </div>
-            <button class="buy-btn" id="motorBtn">50 💰</button>
+        <!-- Balans -->
+        <div class="score-container">
+            <div style="font-size: 13px; color: #a0a0b8; text-transform: uppercase; letter-spacing: 1px;">Balans</div>
+            <div class="score" id="scoreDisplay">0</div>
         </div>
 
-        <!-- 2-Narsa: Qora Tuning rang -->
-        <div class="shop-item">
-            <div class="item-info">
-                <span class="item-name">⚫ Qora Tonirovka</span>
-                <span class="item-desc">Malibuni qoraytirish</span>
+        <!-- DUMALOQ ICHIDAGI MALIBU 2 -->
+        <div class="circle-container" id="clickArea">
+            <img src="https://i.postimg.cc/D0Yg06g4/malibu.png" alt="Malibu 2" class="malibu-img">
+        </div>
+
+        <!-- Upgrade qismi -->
+        <div class="shop-container">
+            <div class="shop-item">
+                <div>
+                    <div class="item-name">🚀 Moshniy Motor</div>
+                    <div class="item-desc">Har klikda +1 tanga ko'p beradi</div>
+                </div>
+                <button class="buy-btn" id="motorBtn">50 💰</button>
             </div>
-            <button class="buy-btn" id="tintBtn">500 💰</button>
         </div>
     </div>
 
     <script>
-        // Ma'lumotlarni xotiradan yuklash yoki noldan boshlash
-        let score = parseInt(localStorage.getItem('m_score')) || 0;
-        let clickPower = parseInt(localStorage.getItem('m_power')) || 1;
-        let isTinted = localStorage.getItem('m_tinted') === 'true';
+        // Telegram WebApp obyektini tekshirish
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // O'yinni silliq qilib to'liq ekranda ochadi
 
-        let motorCost = parseInt(localStorage.getItem('m_motor_cost')) || 50;
+        // Har bir foydalanuvchi uchun uning tg_id si bo'yicha kalit ochamiz
+        const userId = tg.initDataUnsafe?.user?.id || "guest_user";
+        const firstName = tg.initDataUnsafe?.user?.first_name || "Dasturchi";
 
+        // Kalit so'zlar har bir odam uchun alohida bo'ladi
+        const scoreKey = `malibu_score_${userId}`;
+        const powerKey = `malibu_power_${userId}`;
+        const costKey = `malibu_cost_${userId}`;
+        const authKey = `malibu_auth_${userId}`;
+
+        // Ma'lumotlarni yuklash
+        let score = parseInt(localStorage.getItem(scoreKey)) || 0;
+        let clickPower = parseInt(localStorage.getItem(powerKey)) || 1;
+        let motorCost = parseInt(localStorage.getItem(costKey)) || 50;
+        let isRegistered = localStorage.getItem(authKey) === 'true';
+
+        // Elementlarni chaqirib olish
+        const authScreen = document.getElementById('authScreen');
+        const gameScreen = document.getElementById('gameScreen');
         const scoreDisplay = document.getElementById('scoreDisplay');
-        const clickPowerDisplay = document.getElementById('clickPowerDisplay');
+        const userWelcome = document.getElementById('userWelcome');
         const clickArea = document.getElementById('clickArea');
-        const malibuImg = document.getElementById('malibuImg');
-        
         const motorBtn = document.getElementById('motorBtn');
-        const tintBtn = document.getElementById('tintBtn');
 
-        // Boshlang'ich vizual sozlashlar
+        // Agar odam oldin ro'yxatdan o'tgan bo'lsa, birdan o'yinga o'tkazamiz
+        if (isRegistered) {
+            showGame();
+        }
+
+        function startRegistration() {
+            // Ro'yxatdan o'tganini eslab qolamiz
+            localStorage.setItem(authKey, 'true');
+            showGame();
+        }
+
+        function showGame() {
+            authScreen.style.display = 'none';
+            gameScreen.style.display = 'flex';
+            userWelcome.textContent = `Haydovchi: ${firstName}`;
+            updateUI();
+        }
+
         function updateUI() {
             scoreDisplay.textContent = score;
-            clickPowerDisplay.textContent = clickPower;
             motorBtn.textContent = motorCost + " 💰";
-            
-            if (isTinted) {
-                malibuImg.style.filter = "brightness(0.4) contrast(1.2)";
-                tintBtn.textContent = "SOTIB OLINGAN";
-                tintBtn.classList.add('maxed');
-            } else {
-                tintBtn.textContent = "500 💰";
-            }
         }
-        updateUI();
 
-        // KLIK QILISh FUNKSIYASI
-        function handleCreateCoin(clientX, clientY) {
+        // DUMALOQNI BOSGANDA TANGALAR CHIQARISh
+        function handleTap(clientX, clientY) {
             score += clickPower;
             scoreDisplay.textContent = score;
-            localStorage.setItem('m_score', score);
+            localStorage.setItem(scoreKey, score);
 
-            malibuImg.style.transform = 'scale(0.94)';
-            setTimeout(() => { malibuImg.style.transform = 'scale(1)'; }, 50);
+            // Dumaloqni effekt uchun bir oz qisqartirish
+            clickArea.style.transform = 'scale(0.95)';
+            setTimeout(() => { clickArea.style.transform = 'scale(1)'; }, 50);
 
+            // Klik koordinatasi boyicha +1 text chiqarish
             const rect = clickArea.getBoundingClientRect();
             const x = clientX - rect.left;
             const y = clientY - rect.top;
@@ -249,46 +311,31 @@
 
         clickArea.addEventListener('touchstart', (e) => {
             e.preventDefault();
-            handleCreateCoin(e.touches[0].clientX, e.touches[0].clientY);
+            handleTap(e.touches[0].clientX, e.touches[0].clientY);
         });
 
         clickArea.addEventListener('mousedown', (e) => {
             if (e.type === 'mousedown' && 'ontouchstart' in window) return;
-            handleCreateCoin(e.clientX, e.clientY);
+            handleTap(e.clientX, e.clientY);
         });
 
-        // MOTOR UPGRADE SOTIB OLISh
+        // MOTOR SOTIB OLISh
         motorBtn.addEventListener('click', () => {
             if (score >= motorCost) {
                 score -= motorCost;
                 clickPower += 1;
-                motorCost = Math.floor(motorCost * 1.8); // Narx oshadi
+                motorCost = Math.floor(motorCost * 2); // Keyingi safar 2 barobar qimmatlashadi
                 
-                localStorage.setItem('m_score', score);
-                localStorage.setItem('m_power', clickPower);
-                localStorage.setItem('m_motor_cost', motorCost);
-                
-                updateUI();
-            } else {
-                alert("Tangalaringiz yetarli emas! 🏎💨");
-            }
-        });
-
-        // TONIROVKA SOTIB OLISh
-        tintBtn.addEventListener('click', () => {
-            if (isTinted) return;
-            if (score >= 500) {
-                score -= 500;
-                isTinted = true;
-                
-                localStorage.setItem('m_score', score);
-                localStorage.setItem('m_tinted', 'true');
+                localStorage.setItem(scoreKey, score);
+                localStorage.setItem(powerKey, clickPower);
+                localStorage.setItem(costKey, motorCost);
                 
                 updateUI();
             } else {
-                alert("Tonirovka uchun 500 ta tanga kerak! 💰");
+                tg.showAlert("Tangalaringiz yetarli emas! 🏎💨");
             }
         });
     </script>
 </body>
-</html>
+    </html>
+    
