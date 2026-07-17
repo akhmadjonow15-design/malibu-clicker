@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Malibu Clicker</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e1e2f, #0f0f1a);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .score-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .score {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+        }
+
+        .title {
+            font-size: 18px;
+            color: #a0a0b8;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .click-area {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Doiraviy effekt */
+        .click-area::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,215,0,0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .malibu-img {
+            width: 100%;
+            height: auto;
+            z-index: 2;
+            transition: transform 0.05s ease;
+            -webkit-user-drag: none;
+        }
+
+        .malibu-img:active {
+            transform: scale(0.95);
+        }
+
+        /* Bosgandagi +1 effekti */
+        .floating-text {
+            position: absolute;
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffd700;
+            pointer-events: none;
+            z-index: 10;
+            animation: floatUp 0.6s ease-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(1.2);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="score-container">
+        <div class="title">Sening Tangalaring</div>
+        <div class="score" id="scoreDisplay">0</div>
+    </div>
+
+    <!-- Kliklash maydoni -->
+    <div class="click-area" id="clickArea">
+        <!-- Bu yerga Malibu 2 moshinasi rasmi chiqadi -->
+        <img src="https://i.postimg.cc/D0Yg06g4/malibu.png" alt="Malibu 2" class="malibu-img" id="malibuImg">
+    </div>
+
+    <script>
+        let score = parseInt(localStorage.getItem('malibu_score')) || 0;
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const clickArea = document.getElementById('clickArea');
+        const malibuImg = document.getElementById('malibuImg');
+
+        // Boshlang'ich ochkodni ekranga chiqarish
+        scoreDisplay.textContent = score;
+
+        clickArea.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Ekran silkinib ketmasligi uchun
+            handleCreateCoin(e.touches[0].clientX, e.touches[0].clientY);
+        });
+
+        clickArea.addEventListener('mousedown', (e) => {
+            // Agar sichqoncha bilan bosilsa (kompyuterda sinash uchun)
+            if (e.type === 'mousedown' && 'ontouchstart' in window) return;
+            handleCreateCoin(e.clientX, e.clientY);
+        });
+
+        function handleCreateCoin(clientX, clientY) {
+            // Ochkoni oshirish
+            score++;
+            scoreDisplay.textContent = score;
+            localStorage.setItem('malibu_score', score);
+
+            // Moshinani ozgina kichraytirish (effekt)
+            malibuImg.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                malibuImg.style.transform = 'scale(1)';
+            }, 50);
+
+            // +1 matnini yaratish va bosilgan joyga qo'yish
+            const rect = clickArea.getBoundingClientRect();
+            const x = clientX - rect.left;
+            const y = clientY - rect.top;
+
+            const floatText = document.createElement('div');
+            floatText.className = 'floating-text';
+            floatText.textContent = '+1';
+            floatText.style.left = `${x}px`;
+            floatText.style.top = `${y}px`;
+
+            clickArea.appendChild(floatText);
+
+            // Effekt tugagach o'chirib tashlash
+            setTimeout(() => {
+                floatText.remove();
+            }, 600);
+        }
+    </script>
+</body>
+  </html>
+  
