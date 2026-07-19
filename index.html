@@ -14,7 +14,7 @@
         }
 
         body {
-            background: linear-gradient(180deg, #161508, #0a0a05);
+            background: linear-gradient(180deg, #18132b, #0c091a);
             color: white;
             display: flex;
             flex-direction: column;
@@ -26,7 +26,7 @@
             -webkit-user-select: none;
         }
 
-        /* 1. NIK YARATISH EKRANI */
+        /* 1. NIK YARATISH EKRANI (Aynan skrinshatdagi dizayn) */
         #authScreen {
             display: flex;
             flex-direction: column;
@@ -36,56 +36,95 @@
             height: 100%;
             padding: 20px;
             z-index: 999;
+            background: radial-gradient(circle at center, #1f1a3a 0%, #0d0a1c 100%);
         }
 
         .auth-card {
-            background: rgba(26, 25, 15, 0.9);
-            padding: 30px 20px;
-            border-radius: 24px;
-            border: 1px solid #cca43b;
+            background: rgba(30, 27, 51, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 40px 25px;
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             width: 90%;
             max-width: 340px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(204, 164, 59, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
-        .auth-logo {
-            font-size: 50px;
-            margin-bottom: 15px;
-            color: #ffd700;
+        .auth-logo-img {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 15px auto;
+            background: #00d2ff;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+        }
+
+        .auth-logo-img::before {
+            content: '🕹';
+            font-size: 38px;
+        }
+
+        .auth-card h3 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .auth-card p {
+            color: #a5a1b8;
+            font-size: 13px;
+            line-height: 1.4;
+            margin-bottom: 25px;
         }
 
         .auth-input {
             width: 100%;
-            padding: 14px 20px;
-            border-radius: 12px;
-            border: 2px solid #cca43b;
-            background: rgba(0,0,0,0.6);
+            padding: 16px 20px;
+            border-radius: 16px;
+            border: 1px solid #14494a;
+            background: #111021;
             color: white;
-            font-size: 15px;
+            font-size: 16px;
             text-align: center;
-            margin-bottom: 12px;
+            margin-bottom: 20px;
             outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .auth-input:focus {
+            border-color: #00d2ff;
         }
 
         .auth-btn {
-            background: linear-gradient(45deg, #ffd700, #cca43b);
-            color: black;
+            background: linear-gradient(90deg, #00ffcc 0%, #00bcff 100%);
+            color: #05040a;
             border: none;
-            padding: 14px;
+            padding: 16px;
             font-size: 16px;
             font-weight: bold;
-            border-radius: 12px;
+            border-radius: 16px;
             cursor: pointer;
             width: 100%;
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3);
+            transition: transform 0.1s;
+        }
+
+        .auth-btn:active {
+            transform: scale(0.98);
         }
 
         /* GLOBAL TOP PANEL */
         .global-header {
             width: 92%;
             max-width: 400px;
-            background: rgba(30, 28, 16, 0.7);
-            border: 1px solid rgba(204, 164, 59, 0.2);
+            background: rgba(35, 30, 60, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 20px;
             padding: 12px 15px;
             display: flex;
@@ -103,7 +142,7 @@
         .user-avatar {
             width: 36px;
             height: 36px;
-            background: radial-gradient(circle, #ffd700, #b38f00);
+            background: linear-gradient(135deg, #00ffcc, #00bcff);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -120,7 +159,7 @@
 
         .coin-title {
             font-size: 10px;
-            color: #aaa;
+            color: #8a85a3;
             letter-spacing: 1px;
             text-transform: uppercase;
         }
@@ -141,8 +180,8 @@
         }
 
         .balance-badge {
-            background: #111;
-            border: 1px solid rgba(255,255,255,0.1);
+            background: #090714;
+            border: 1px solid rgba(255,255,255,0.05);
             padding: 6px 12px;
             border-radius: 20px;
             display: flex;
@@ -192,9 +231,9 @@
         }
 
         .tap-power-badge {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid #ffd700;
-            color: #ffd700;
+            background: rgba(0, 210, 255, 0.1);
+            border: 1px solid #00bcff;
+            color: #00bcff;
             padding: 4px 12px;
             border-radius: 12px;
             font-size: 11px;
@@ -231,7 +270,7 @@
             display: flex;
             justify-content: space-between;
             font-size: 13px;
-            color: #aaa;
+            color: #8a85a3;
             margin-bottom: 6px;
             font-weight: bold;
         }
@@ -239,7 +278,7 @@
         .energy-bar-bg {
             width: 100%;
             height: 14px;
-            background: #222;
+            background: #110e21;
             border-radius: 10px;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.05);
@@ -248,11 +287,11 @@
         .energy-bar-fill {
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, #ffd700, #cca43b);
+            background: linear-gradient(90deg, #00ffcc, #00bcff);
             transition: width 0.1s ease;
         }
 
-        /* RO'YXAT KO'RINIShIDAGI LIST LAR (BOOST, SMM, DONAT) */
+        /* LIST ELEMENTLARI */
         .items-list {
             width: 100%;
             display: flex;
@@ -262,7 +301,7 @@
 
         .list-section-title {
             font-size: 12px;
-            color: #ffd700;
+            color: #00ffcc;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin: 10px 0 5px 2px;
@@ -270,8 +309,8 @@
         }
 
         .premium-card {
-            background: rgba(25, 24, 16, 0.8);
-            border: 1px solid rgba(204, 164, 59, 0.2);
+            background: rgba(30, 26, 54, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             border-radius: 18px;
             padding: 12px 15px;
             display: flex;
@@ -289,7 +328,7 @@
         .card-icon {
             width: 44px;
             height: 44px;
-            background: #111;
+            background: #0d0a1c;
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -311,7 +350,7 @@
 
         .card-subtitle {
             font-size: 11px;
-            color: #888;
+            color: #a5a1b8;
             margin-top: 2px;
         }
 
@@ -323,9 +362,9 @@
         }
 
         .action-arrow-btn {
-            width: 32px;
-            height: 32px;
-            background: #ffd700;
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, #00ffcc, #00bcff);
             color: black;
             border-radius: 50%;
             border: none;
@@ -337,48 +376,49 @@
             font-size: 16px;
         }
 
-        /* AUKSION VA FILTR */
+        /* AUKSION FILTRLARI */
         .filter-tabs {
             display: flex;
-            background: #111;
+            background: #0d0a1c;
             width: 100%;
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 4px;
             margin-bottom: 12px;
+            border: 1px solid rgba(255,255,255,0.03);
         }
 
         .filter-btn {
             flex: 1;
             background: transparent;
             border: none;
-            color: #888;
-            padding: 8px;
+            color: #7b7699;
+            padding: 10px;
             font-weight: bold;
             font-size: 13px;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
         }
 
         .filter-btn.active {
-            background: #ffd700;
+            background: linear-gradient(135deg, #00ffcc, #00bcff);
             color: black;
         }
 
         /* PROFIL ELEMENTLARI */
         .uzs-balance-view {
             width: 100%;
-            background: rgba(255,215,0,0.02);
-            border: 1px dashed #ffd700;
+            background: rgba(0, 255, 204, 0.03);
+            border: 1px dashed #00ffcc;
             border-radius: 16px;
-            padding: 15px;
+            padding: 18px;
             text-align: center;
             margin-bottom: 15px;
         }
 
         .profile-menu-item {
             width: 100%;
-            background: #15150e;
-            padding: 14px 16px;
+            background: #17132d;
+            padding: 15px 16px;
             border-radius: 14px;
             display: flex;
             justify-content: space-between;
@@ -394,12 +434,12 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: #0f0f09;
-            border-top: 1px solid rgba(204, 164, 59, 0.2);
+            background: #0a0814;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding: 8px 0 15px 0;
+            padding: 8px 0 16px 0;
             z-index: 900;
         }
 
@@ -407,7 +447,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: #666;
+            color: #555170;
             font-size: 10px;
             font-weight: bold;
             text-transform: uppercase;
@@ -417,7 +457,7 @@
         }
 
         .nav-item.active {
-            color: #ffd700;
+            color: #00ffcc;
         }
 
         .nav-icon {
@@ -446,35 +486,36 @@
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.85);
             z-index: 1000;
             align-items: center;
             justify-content: center;
         }
 
         .modal-card {
-            background: #14140e;
-            border: 2px solid #ffd700;
+            background: #17132d;
+            border: 2px solid #00ffcc;
             border-radius: 24px;
-            padding: 22px;
+            padding: 25px;
             width: 90%;
             max-width: 350px;
             text-align: center;
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.2);
         }
 
         .modal-input {
-            width: 100%; padding: 12px; margin-bottom: 12px;
-            border-radius: 10px; border: 1px solid #cca43b;
-            background: #000; color: white; text-align: center; outline: none;
+            width: 100%; padding: 14px; margin-bottom: 12px;
+            border-radius: 12px; border: 1px solid #00bcff;
+            background: #0d0a1c; color: white; text-align: center; outline: none;
         }
 
         .modal-btn {
-            width: 100%; padding: 12px; border: none; border-radius: 10px;
-            background: linear-gradient(45deg, #ffd700, #cca43b); color: black; font-weight: bold;
+            width: 100%; padding: 14px; border: none; border-radius: 12px;
+            background: linear-gradient(90deg, #00ffcc, #00bcff); color: black; font-weight: bold;
             cursor: pointer; margin-bottom: 10px;
         }
 
-        .close-txt { color: #888; font-size: 13px; cursor: pointer; text-decoration: underline; }
+        .close-txt { color: #a5a1b8; font-size: 13px; cursor: pointer; text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -482,11 +523,11 @@
     <!-- 1. UNIKAL NIK YARATISH EKRANI -->
     <div id="authScreen">
         <div class="auth-card">
-            <div class="auth-logo">⚜️</div>
-            <h3 style="margin-bottom:5px;">Yumi Coin & SMM</h3>
-            <p style="color:#aaa; font-size:12px; margin-bottom:20px;">Tizimda takrorlanmaydigan unikal nom yarating</p>
-            <input type="text" id="uniqueNikInput" class="auth-input" placeholder="@nik_yozing...">
-            <button class="auth-btn" onclick="registerUniqueNik()">O'YINNI BOSHLASH 🚀</button>
+            <div class="auth-logo-img"></div>
+            <h3>Taxallus yarating</h3>
+            <p>Tizimda takrorlanmaydigan unikal nom kiriting</p>
+            <input type="text" id="uniqueNikInput" class="auth-input" placeholder="Saidjon.11">
+            <button class="auth-btn" id="startGameBtn">O'YINNI BOSHLASH 🚀</button>
         </div>
     </div>
 
@@ -496,7 +537,7 @@
             <div class="user-avatar">Y</div>
             <div class="user-meta">
                 <span class="coin-title">Yumi Coin</span>
-                <span class="user-nik" id="displayNik" onclick="tryOpenAdmin()">-</span>
+                <span class="user-nik" id="displayNik">-</span>
             </div>
         </div>
         <div class="balances">
@@ -540,13 +581,13 @@
                         <span class="card-price-tag" id="boosterPriceTxt">150 🪙</span>
                     </div>
                 </div>
-                <button class="action-arrow-btn" onclick="buyBooster()">+</button>
+                <button class="action-arrow-btn" id="btn-buy-booster">+</button>
             </div>
 
             <div class="list-section-title">SMM Xizmatlari (Tanga evaziga)</div>
             <div class="premium-card">
                 <div class="card-left">
-                    <div class="card-icon">👀</div>
+                    <div class="card-icon">📸</div>
                     <div class="card-details">
                         <span class="card-title">Instagram Prasmotr</span>
                         <span class="card-subtitle">Sifatli ko'rilishlar soni</span>
@@ -602,29 +643,4 @@
                         <span class="card-price-tag">5,000 🪙</span>
                     </div>
                 </div>
-                <button class="action-arrow-btn" onclick="triggerOrderFlow('PUBG 60 UC', 5000, 'coin', 'game')">></button>
-            </div>
-
-            <div class="premium-card">
-                <div class="card-left">
-                    <div class="card-icon">🔥</div>
-                    <div class="card-details">
-                        <span class="card-title">Free Fire — 110 Diamonds</span>
-                        <span class="card-subtitle">Garena Free Fire donat xizmati</span>
-                        <span class="card-price-tag">7,500 🪙</span>
-                    </div>
-                </div>
-                <button class="action-arrow-btn" onclick="triggerOrderFlow('Free Fire 110 Diamonds', 7500, 'coin', 'game')">></button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 4. VAZIFALAR EKRANI -->
-    <div id="tab-vazifalar" class="screen-content">
-        <h2 style="align-self:flex-start; margin-bottom:15px; font-size:20px;">📋 Kundalik Vazifalar</h2>
-        <div class="items-list">
-            <div class="premium-card">
-                <div class="card-left">
-                    <div class="card-icon">📢</div>
-                    <div class="card-details">
-                        <span class="card-title">Telegram Kanalga a'zo bo'lish</spa
+                <button class="action-arrow-btn" onclick="triggerOr
