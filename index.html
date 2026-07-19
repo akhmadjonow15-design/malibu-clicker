@@ -11,14 +11,13 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Ekran tez-tez bosilganda matnlar ko'k bo'lib belgilanib qolmasligi uchun */
             user-select: none;
             -webkit-user-select: none;
             -webkit-touch-callout: none;
         }
 
         body {
-            background: linear-gradient(180deg, #18132b, #0c091a);
+            background: linear-gradient(180deg, #120e24, #080612);
             color: white;
             display: flex;
             flex-direction: column;
@@ -26,23 +25,23 @@
             justify-content: flex-start;
             height: 100vh;
             overflow: hidden;
-            /* Ekran siljib ketmasligi (scrolling) uchun cheklov */
             position: fixed;
             width: 100%;
         }
 
-        /* GLOBAL TOP PANEL */
+        /* HUD TOP PANEL */
         .global-header {
             width: 92%;
             max-width: 400px;
-            background: rgba(35, 30, 60, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(28, 23, 51, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 20px;
             padding: 12px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-top: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .user-info {
@@ -52,8 +51,8 @@
         }
 
         .user-avatar {
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             background: linear-gradient(135deg, #00ffcc, #00bcff);
             border-radius: 50%;
             display: flex;
@@ -61,7 +60,8 @@
             justify-content: center;
             font-weight: bold;
             color: black;
-            font-size: 14px;
+            font-size: 13px;
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
         }
 
         .user-meta {
@@ -84,99 +84,109 @@
 
         .balances {
             display: flex;
-            gap: 8px;
+            flex-direction: column;
+            gap: 4px;
+            align-items: flex-end;
         }
 
         .balance-badge {
-            background: #090714;
+            background: #070510;
             border: 1px solid rgba(255,255,255,0.05);
-            padding: 6px 12px;
-            border-radius: 20px;
+            padding: 4px 10px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             gap: 5px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
         }
 
         .balance-badge.gold { border-color: #ffd700; color: #ffd700; }
         .balance-badge.diamond { border-color: #00ccff; color: #00ccff; }
 
-        /* EKRANLAR KONTEYNERI */
+        /* SCREENS CONTAINER */
         .screen-content {
             width: 92%;
             max-width: 400px;
             flex: 1;
             margin-top: 15px;
-            margin-bottom: 85px;
+            margin-bottom: 90px;
             overflow-y: auto;
             display: none;
             flex-direction: column;
             align-items: center;
         }
 
-        /* CLICKER */
+        /* 1. CLICKER SCREEN */
         #tab-bosish {
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            position: relative;
         }
 
         .click-score-view {
             text-align: center;
-            margin-top: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .big-score {
-            font-size: 46px;
+            font-size: 44px;
             font-weight: bold;
             color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.5);
         }
 
         .tap-power-badge {
-            background: rgba(0, 210, 255, 0.1);
+            background: rgba(0, 210, 255, 0.12);
             border: 1px solid #00bcff;
             color: #00bcff;
-            padding: 4px 12px;
+            padding: 4px 14px;
             border-radius: 12px;
-            font-size: 11px;
-            margin-top: 5px;
+            font-size: 12px;
+            margin-top: 8px;
             display: inline-block;
+            font-weight: bold;
         }
 
-        .coin-trigger-area {
-            width: 240px;
-            height: 240px;
-            background: radial-gradient(circle, #ffe875, #b8860b);
-            border-radius: 50%;
-            border: 8px solid #ffd700;
-            box-shadow: 0 0 40px rgba(218, 165, 32, 0.4);
+        .coin-trigger-container {
+            position: relative;
+            width: 250px;
+            height: 250px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 110px;
+        }
+
+        .coin-trigger-area {
+            width: 230px;
+            height: 230px;
+            background: radial-gradient(circle, #ffe359, #b38000);
+            border-radius: 50%;
+            border: 8px solid #ffd700;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
             font-weight: bold;
             color: rgba(255,255,255,0.9);
             cursor: pointer;
             transition: transform 0.05s ease;
-            position: relative;
-            margin-top: 10px;
-            /* Klik paytida brauzer zoom bo'lib ketmasligi uchun */
             touch-action: manipulation;
         }
 
         .coin-trigger-area:active {
-            transform: scale(0.95);
+            transform: scale(0.94);
         }
 
         .energy-box {
             width: 100%;
-            margin-top: 30px;
+            margin-top: 35px;
             padding: 0 10px;
         }
 
@@ -184,7 +194,7 @@
             display: flex;
             justify-content: space-between;
             font-size: 13px;
-            color: #8a85a3;
+            color: #a5a1b8;
             margin-bottom: 6px;
             font-weight: bold;
         }
@@ -192,7 +202,7 @@
         .energy-bar-bg {
             width: 100%;
             height: 14px;
-            background: #110e21;
+            background: #0a0815;
             border-radius: 10px;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.05);
@@ -205,7 +215,7 @@
             transition: width 0.1s ease;
         }
 
-        /* RO'YXATLAR */
+        /* LISTS & CARDS */
         .items-list {
             width: 100%;
             display: flex;
@@ -218,15 +228,16 @@
             color: #00ffcc;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin: 10px 0 5px 2px;
+            margin: 15px 0 5px 2px;
             align-self: flex-start;
+            font-weight: bold;
         }
 
         .premium-card {
-            background: rgba(30, 26, 54, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(28, 23, 51, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 18px;
-            padding: 12px 15px;
+            padding: 14px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -240,15 +251,15 @@
         }
 
         .card-icon {
-            width: 44px;
-            height: 44px;
-            background: #0d0a1c;
-            border-radius: 12px;
+            width: 46px;
+            height: 46px;
+            background: #090714;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
-            border: 1px solid rgba(255,255,255,0.05);
+            font-size: 24px;
+            border: 1px solid rgba(255,255,255,0.06);
         }
 
         .card-details {
@@ -272,72 +283,46 @@
             font-size: 12px;
             color: #ffd700;
             font-weight: bold;
-            margin-top: 1px;
+            margin-top: 2px;
         }
 
         .action-arrow-btn {
-            width: 34px;
-            height: 34px;
+            padding: 8px 16px;
             background: linear-gradient(135deg, #00ffcc, #00bcff);
             color: black;
-            border-radius: 50%;
+            border-radius: 12px;
             border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             font-weight: bold;
             cursor: pointer;
-            font-size: 16px;
-        }
-
-        .filter-tabs {
-            display: flex;
-            background: #0d0a1c;
-            width: 100%;
-            border-radius: 14px;
-            padding: 4px;
-            margin-bottom: 12px;
-            border: 1px solid rgba(255,255,255,0.03);
-        }
-
-        .filter-btn {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: #7b7699;
-            padding: 10px;
-            font-weight: bold;
             font-size: 13px;
-            border-radius: 10px;
-            cursor: pointer;
         }
 
-        .filter-btn.active {
-            background: linear-gradient(135deg, #00ffcc, #00bcff);
-            color: black;
-        }
+        .action-arrow-btn:active { transform: scale(0.95); }
 
+        /* PROFIL */
         .uzs-balance-view {
             width: 100%;
-            background: rgba(0, 255, 204, 0.03);
+            background: rgba(0, 255, 204, 0.04);
             border: 1px dashed #00ffcc;
-            border-radius: 16px;
-            padding: 18px;
+            border-radius: 18px;
+            padding: 20px;
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            margin-top: 10px;
         }
 
         .profile-menu-item {
             width: 100%;
-            background: #17132d;
-            padding: 15px 16px;
-            border-radius: 14px;
+            background: #1c1733;
+            padding: 16px;
+            border-radius: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
-            border: 1px solid rgba(255,255,255,0.02);
+            margin-bottom: 10px;
+            border: 1px solid rgba(255,255,255,0.03);
             cursor: pointer;
+            font-weight: bold;
         }
 
         /* BOTTOM NAV */
@@ -346,12 +331,12 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: #0a0814;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            background: #080612;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding: 8px 0 16px 0;
+            padding: 10px 0 20px 0;
             z-index: 900;
         }
 
@@ -373,65 +358,96 @@
         }
 
         .nav-icon {
-            font-size: 20px;
+            font-size: 22px;
         }
 
+        /* AUCTION TABS */
+        .filter-tabs {
+            display: flex;
+            background: #090714;
+            width: 100%;
+            border-radius: 14px;
+            padding: 4px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .filter-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #7b7699;
+            padding: 12px;
+            font-weight: bold;
+            font-size: 13px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #00ffcc, #00bcff);
+            color: black;
+        }
+
+        /* FLOATING TEXT EFFECT */
         .floating-text {
             position: absolute;
-            font-size: 32px;
+            font-size: 35px;
             font-weight: bold;
             color: #ffffff;
             pointer-events: none;
             z-index: 99;
             animation: floatUp 0.4s ease-out forwards;
-            text-shadow: 0 2px 6px rgba(0,0,0,0.9);
+            text-shadow: 0 4px 8px rgba(0,0,0,0.8);
         }
 
         @keyframes floatUp {
             0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-100px) scale(1.3); }
+            100% { opacity: 0; transform: translateY(-120px) scale(1.3); }
         }
 
-        /* MODALLAR */
+        /* MODAL OVERLAYS */
         .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
+            background: rgba(0,0,0,0.88);
             z-index: 1000;
             align-items: center;
             justify-content: center;
         }
 
         .modal-card {
-            background: #17132d;
+            background: #1c1733;
             border: 2px solid #00ffcc;
             border-radius: 24px;
             padding: 25px;
             width: 90%;
             max-width: 350px;
             text-align: center;
-            box-shadow: 0 0 25px rgba(0, 255, 204, 0.2);
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.25);
         }
 
         .modal-input {
             width: 100%; padding: 14px; margin-bottom: 12px;
             border-radius: 12px; border: 1px solid #00bcff;
-            background: #0d0a1c; color: white; text-align: center; outline: none;
+            background: #090714; color: white; text-align: center; outline: none;
+            font-size: 15px;
         }
 
         .modal-btn {
             width: 100%; padding: 14px; border: none; border-radius: 12px;
             background: linear-gradient(90deg, #00ffcc, #00bcff); color: black; font-weight: bold;
-            cursor: pointer; margin-bottom: 10px;
+            cursor: pointer; margin-bottom: 10px; font-size: 14px;
         }
 
-        .close-txt { color: #a5a1b8; font-size: 13px; cursor: pointer; text-decoration: underline; }
+        .modal-btn:active { transform: scale(0.97); }
+        .close-txt { color: #a5a1b8; font-size: 13px; cursor: pointer; text-decoration: underline; margin-top: 5px;}
     </style>
 </head>
 <body>
 
-    <!-- HUD LOGO & BALANSLAR EKRANI -->
+    <!-- GLOBAL HUD PANEL -->
     <div class="global-header" id="globalHeader">
         <div class="user-info">
             <div class="user-avatar" id="avatarLetter">ID</div>
@@ -441,19 +457,20 @@
             </div>
         </div>
         <div class="balances">
-            <div class="balance-badge diamond">🔹 <span id="diamondDisplay">0</span></div>
             <div class="balance-badge gold">🪙 <span id="goldDisplay">0</span></div>
+            <div class="balance-badge diamond">🔹 <span id="diamondDisplay">0</span></div>
         </div>
     </div>
 
-    <!-- 1. BOSISH (CLICKER) -->
+    <!-- TAB 1: BOSISH (CLICKER) -->
     <div id="tab-bosish" class="screen-content">
         <div class="click-score-view">
             <div class="big-score">🪙 <span id="clickGoldDisplay">0</span></div>
             <div class="tap-power-badge" id="clickPowerDisplay">Tap x1</div>
         </div>
-        <!-- Katta Dumaloq Klik maydoni -->
-        <div class="coin-trigger-area" id="clickArea">Y</div>
+        <div class="coin-trigger-container">
+            <div class="coin-trigger-area" id="clickArea">Y</div>
+        </div>
         <div class="energy-box">
             <div class="energy-text-row">
                 <span>⚡ ENERGY</span>
@@ -465,21 +482,21 @@
         </div>
     </div>
 
-    <!-- 2. BOOST EKRANI -->
+    <!-- TAB 2: BOOST & SMM MARKET -->
     <div id="tab-boost" class="screen-content">
-        <h2 style="align-self:flex-start; margin-bottom:15px; font-size:20px;">⚡ Tezlatkichlar & Do'kon</h2>
+        <h2 style="align-self:flex-start; margin-bottom:10px; font-size:20px;">🚀 Bozor & Boosters</h2>
         <div class="items-list">
-            <div class="list-section-title">O'yin Tezlatkichlari</div>
+            <div class="list-section-title">O'yin Upgradelari</div>
             <div class="premium-card">
                 <div class="card-left">
-                    <div class="card-icon">🚀</div>
+                    <div class="card-icon">⚡</div>
                     <div class="card-details">
                         <span class="card-title">Multitap (Klik +1)</span>
-                        <span class="card-subtitle">Har bir bosishga ko'proq tanga beradi</span>
+                        <span class="card-subtitle">Har klikda ko'proq tanga beradi</span>
                         <span class="card-price-tag" id="boosterPriceTxt">150 🪙</span>
                     </div>
                 </div>
-                <button class="action-arrow-btn" id="btn-buy-booster">+</button>
+                <button class="action-arrow-btn" id="btn-buy-booster">Sotib olish</button>
             </div>
 
             <div class="list-section-title">SMM Xizmatlari</div>
@@ -488,108 +505,108 @@
                     <div class="card-icon">📸</div>
                     <div class="card-details">
                         <span class="card-title">Instagram Prasmotr</span>
-                        <span class="card-subtitle">Sifatli ko'rilishlar soni</span>
+                        <span class="card-subtitle">Sifatli ko'rilishlar</span>
                         <span class="card-price-tag">2,500 🪙</span>
                     </div>
                 </div>
-                <button class="action-arrow-btn" onclick="triggerOrderFlow('Instagram Prasmotr', 2500, 'coin', 'insta')">></button>
+                <button class="action-arrow-btn" id="order-insta-views">Buyurtma</button>
             </div>
             <div class="premium-card">
                 <div class="card-left">
                     <div class="card-icon">👥</div>
                     <div class="card-details">
                         <span class="card-title">Instagram Obunachi</span>
-                        <span class="card-subtitle">Tez va sifatli obunachilar</span>
+                        <span class="card-subtitle">Tez va ishonchli obunachilar</span>
                         <span class="card-price-tag">9,000 🪙</span>
                     </div>
                 </div>
-                <button class="action-arrow-btn" onclick="triggerOrderFlow('Instagram Obunachi', 9000, 'coin', 'insta')">></button>
+                <button class="action-arrow-btn" id="order-insta-subs">Buyurtma</button>
             </div>
 
-            <div class="list-section-title">🎮 O'yinlar uchun Donat</div>
+            <div class="list-section-title">🎮 O'yin Donat</div>
             <div class="premium-card">
                 <div class="card-left">
                     <div class="card-icon">🪖</div>
                     <div class="card-details">
                         <span class="card-title">PUBG Mobile — 60 UC</span>
-                        <span class="card-subtitle">Sizning o'yin hisobingizga donat</span>
+                        <span class="card-subtitle">Sizning PUBG hisobingizga donat</span>
                         <span class="card-price-tag">5,000 🪙</span>
                     </div>
                 </div>
-                <button class="action-arrow-btn" onclick="triggerOrderFlow('PUBG 60 UC', 5000, 'coin', 'game')">></button>
+                <button class="action-arrow-btn" id="order-pubg-uc">Donat</button>
             </div>
         </div>
     </div>
 
-    <!-- 3. VAZIFALAR EKRANI -->
+    <!-- TAB 3: VAZIFALAR -->
     <div id="tab-vazifalar" class="screen-content">
-        <h2 style="align-self:flex-start; margin-bottom:15px; font-size:20px;">📋 Kundalik Vazifalar</h2>
+        <h2 style="align-self:flex-start; margin-bottom:15px; font-size:20px;">📋 Vazifalar</h2>
         <div class="items-list">
             <div class="premium-card">
                 <div class="card-left">
                     <div class="card-icon">📢</div>
                     <div class="card-details">
                         <span class="card-title">Telegram Kanalga a'zo bo'lish</span>
-                        <span class="card-subtitle">Homiy kanalimizga qo'shiling</span>
+                        <span class="card-subtitle">Rasmiy kanalimizga kiring</span>
                         <span class="card-price-tag">+1,000 🪙</span>
                     </div>
                 </div>
-                <button class="action-arrow-btn" onclick="completeTask(1000)">✓</button>
+                <button class="action-arrow-btn" id="btn-task-tg">Bajarish</button>
             </div>
         </div>
     </div>
 
-    <!-- 4. AUKSION EKRANI -->
+    <!-- TAB 4: AUKSION -->
     <div id="tab-auksion" class="screen-content">
         <div class="filter-tabs">
-            <button class="filter-btn active" id="flt-faol" onclick="setAuctionFilter('faol')">FAOL</button>
-            <button class="filter-btn" id="flt-tugagan" onclick="setAuctionFilter('tugagan')">TUGAGAN</button>
+            <button class="filter-btn active" id="flt-faol">FAOL</button>
+            <button class="filter-btn" id="flt-tugagan">TUGAGAN</button>
         </div>
         <div class="items-list" id="auctionActiveList">
             <div class="premium-card">
                 <div class="card-left">
-                    <div class="card-icon">👥</div>
+                    <div class="card-icon">⚖️</div>
                     <div class="card-details">
-                        <span class="card-title">Instagram - 1k 👥</span>
-                        <span class="card-subtitle">Followers (41 taklif)</span>
-                        <span class="card-price-tag">9,000 🪙 • 05:23:52</span>
+                        <span class="card-title">Instagram — 1k Obunachi</span>
+                        <span class="card-subtitle">Jonli auksion jarayoni</span>
+                        <span class="card-price-tag">9,000 🪙 • 04:12:00 qoldi</span>
                     </div>
                 </div>
-                <button class="action-arrow-btn" onclick="triggerOrderFlow('Auksion: Instagram 1K', 9000, 'coin', 'insta')">></button>
+                <button class="action-arrow-btn" id="btn-auction-bid">Tikish</button>
             </div>
         </div>
         <div class="items-list" id="auctionEndedList" style="display:none;">
-            <p style="text-align:center; color:#666; margin-top:20px; font-size:13px;">Tugagan auksionlar mavjud emas.</p>
+            <p style="text-align:center; color:#7b7699; margin-top:20px; font-size:13px;">Hozircha tugagan auksionlar yo'q.</p>
         </div>
     </div>
 
-    <!-- 5. PROFIL EKRANI -->
+    <!-- TAB 5: PROFIL (DONAT / PUL CHIQARISH) -->
     <div id="tab-profil" class="screen-content">
         <div class="uzs-balance-view">
             <span style="font-size:12px; color:#a5a1b8; text-transform:uppercase;">UZS Balans</span>
-            <h1 style="color:#00ffcc; font-size:32px; margin-top:5px;" id="moneyDisplay">0 uzs</h1>
+            <h1 style="color:#00ffcc; font-size:32px; margin-top:5px;" id="moneyDisplay">0 UZS</h1>
         </div>
+        
         <div style="display:flex; gap:10px; width:100%; margin-bottom:15px;">
-            <button class="modal-btn" style="margin:0; flex:1;" onclick="openBuyCoinsModal()">➕ Pul kiritish</button>
-            <button class="modal-btn" style="margin:0; flex:1; background:#0d0a1c; color:#00ffcc; border:1px solid #00ffcc;" onclick="openWithdrawModal()">💵 Pul chiqarish</button>
+            <button class="modal-btn" style="margin:0; flex:1;" id="p-btn-deposit">➕ Pul kiritish</button>
+            <button class="modal-btn" style="margin:0; flex:1; background:#090714; color:#00ffcc; border:1px solid #00ffcc;" id="p-btn-withdraw">💵 Pul chiqarish</button>
         </div>
-        <div class="profile-menu-item" onclick="claimDailyBonus()">
+
+        <div class="profile-menu-item" id="p-btn-bonus">
             <span>🎁 Kunlik Bonus</span>
             <span style="color:#00ffcc;">Olish ></span>
         </div>
     </div>
 
-    <!-- BOTTOM NAV BAR -->
+    <!-- BOTTOM NAVIGATION BAR -->
     <div class="bottom-nav" id="bottomNav">
-        <div class="nav-item" id="nav-boost" onclick="switchTab('boost')"><span class="nav-icon">🚀</span><span>Boost</span></div>
-        <div class="nav-item" id="nav-vazifalar" onclick="switchTab('vazifalar')"><span class="nav-icon">📋</span><span>Vazifalar</span></div>
-        <div class="nav-item active" id="nav-bosish" onclick="switchTab('bosish')"><span class="nav-icon">🎯</span><span>Bosish</span></div>
-        <div class="nav-item" id="nav-auksion" onclick="switchTab('auksion')"><span class="nav-icon">⚖️</span><span>Auksion</span></div>
-        <div class="nav-item" id="nav-profil" onclick="switchTab('profil')"><span class="nav-icon">👤</span><span>Profil</span></div>
+        <div class="nav-item" id="nav-boost"><span class="nav-icon">🚀</span><span>Boost</span></div>
+        <div class="nav-item" id="nav-vazifalar"><span class="nav-icon">📋</span><span>Vazifalar</span></div>
+        <div class="nav-item active" id="nav-bosish"><span class="nav-icon">🎯</span><span>Bosish</span></div>
+        <div class="nav-item" id="nav-auksion"><span class="nav-icon">⚖️</span><span>Auksion</span></div>
+        <div class="nav-item" id="nav-profil"><span class="nav-icon">👤</span><span>Profil</span></div>
     </div>
 
-    <!-- MODAL VAZIFALAR -->
-    <div id="instaModal" class="modal-overlay">
-        <div class="modal-card">
-            <h3 style="color:#00ffcc; margin-bottom:8px;">📸 INSTAGRAM</h3>
- 
+    <!-- ================= ALL MODALS ================= -->
+    <!-- INSTAGRAM INPUT MODAL -->
+    <div id="instaModal
