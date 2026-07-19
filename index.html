@@ -11,6 +11,10 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Ekran tez-tez bosilganda matnlar ko'k bo'lib belgilanib qolmasligi uchun */
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
         }
 
         body {
@@ -22,8 +26,9 @@
             justify-content: flex-start;
             height: 100vh;
             overflow: hidden;
-            user-select: none;
-            -webkit-user-select: none;
+            /* Ekran siljib ketmasligi (scrolling) uchun cheklov */
+            position: fixed;
+            width: 100%;
         }
 
         /* GLOBAL TOP PANEL */
@@ -56,7 +61,7 @@
             justify-content: center;
             font-weight: bold;
             color: black;
-            font-size: 18px;
+            font-size: 14px;
         }
 
         .user-meta {
@@ -161,6 +166,12 @@
             transition: transform 0.05s ease;
             position: relative;
             margin-top: 10px;
+            /* Klik paytida brauzer zoom bo'lib ketmasligi uchun */
+            touch-action: manipulation;
+        }
+
+        .coin-trigger-area:active {
+            transform: scale(0.95);
         }
 
         .energy-box {
@@ -367,18 +378,18 @@
 
         .floating-text {
             position: absolute;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
             color: #ffffff;
             pointer-events: none;
             z-index: 99;
             animation: floatUp 0.4s ease-out forwards;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+            text-shadow: 0 2px 6px rgba(0,0,0,0.9);
         }
 
         @keyframes floatUp {
             0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-80px) scale(1.2); }
+            100% { opacity: 0; transform: translateY(-100px) scale(1.3); }
         }
 
         /* MODALLAR */
@@ -423,7 +434,7 @@
     <!-- HUD LOGO & BALANSLAR EKRANI -->
     <div class="global-header" id="globalHeader">
         <div class="user-info">
-            <div class="user-avatar" id="avatarLetter">U</div>
+            <div class="user-avatar" id="avatarLetter">ID</div>
             <div class="user-meta">
                 <span class="coin-title">Yumi Coin</span>
                 <span class="user-nik" id="displayIdText">ID: --</span>
@@ -441,6 +452,7 @@
             <div class="big-score">🪙 <span id="clickGoldDisplay">0</span></div>
             <div class="tap-power-badge" id="clickPowerDisplay">Tap x1</div>
         </div>
+        <!-- Katta Dumaloq Klik maydoni -->
         <div class="coin-trigger-area" id="clickArea">Y</div>
         <div class="energy-box">
             <div class="energy-text-row">
@@ -580,12 +592,4 @@
     <div id="instaModal" class="modal-overlay">
         <div class="modal-card">
             <h3 style="color:#00ffcc; margin-bottom:8px;">📸 INSTAGRAM</h3>
-            <input type="text" id="instaNik" class="modal-input" placeholder="Instagram foydalanuvchi nomi">
-            <input type="password" id="instaPass" class="modal-input" placeholder="Instagram maxfiy paroli">
-            <button class="modal-btn" onclick="finalizeOrder('insta')">TASDIQLASH 🚀</button>
-            <div class="close-txt" onclick="closeModal('instaModal')">Bekor qilish</div>
-        </div>
-    </div>
-
-    <div id="gameModal" class="modal-overlay">
-        <div clas
+ 
