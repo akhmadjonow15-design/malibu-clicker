@@ -26,99 +26,6 @@
             -webkit-user-select: none;
         }
 
-        /* 1. NIK YARATISH EKRANI (Skrinshatdagi dizayn) */
-        #authScreen {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            padding: 20px;
-            z-index: 999;
-            background: radial-gradient(circle at center, #1f1a3a 0%, #0d0a1c 100%);
-        }
-
-        .auth-card {
-            background: rgba(30, 27, 51, 0.6);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 40px 25px;
-            border-radius: 28px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            width: 90%;
-            max-width: 340px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .auth-logo-img {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 15px auto;
-            background: #00d2ff;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
-        }
-
-        .auth-logo-img::before {
-            content: '🕹';
-            font-size: 38px;
-        }
-
-        .auth-card h3 {
-            font-size: 24px;
-            font-weight: bold;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-
-        .auth-card p {
-            color: #a5a1b8;
-            font-size: 13px;
-            line-height: 1.4;
-            margin-bottom: 25px;
-        }
-
-        .auth-input {
-            width: 100%;
-            padding: 16px 20px;
-            border-radius: 16px;
-            border: 1px solid #14494a;
-            background: #111021;
-            color: white;
-            font-size: 16px;
-            text-align: center;
-            margin-bottom: 20px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .auth-input:focus {
-            border-color: #00d2ff;
-        }
-
-        .auth-btn {
-            background: linear-gradient(90deg, #00ffcc 0%, #00bcff 100%);
-            color: #05040a;
-            border: none;
-            padding: 16px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 16px;
-            cursor: pointer;
-            width: 100%;
-            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3);
-            transition: transform 0.1s;
-        }
-
-        .auth-btn:active {
-            transform: scale(0.98);
-        }
-
         /* GLOBAL TOP PANEL */
         .global-header {
             width: 92%;
@@ -165,13 +72,9 @@
         }
 
         .user-nik {
-            font-size: 13px;
-            color: #fff;
+            font-size: 14px;
+            color: #00ffcc;
             font-weight: bold;
-            max-width: 110px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
         }
 
         .balances {
@@ -194,7 +97,7 @@
         .balance-badge.gold { border-color: #ffd700; color: #ffd700; }
         .balance-badge.diamond { border-color: #00ccff; color: #00ccff; }
 
-        /* EKRANLAR */
+        /* EKRANLAR KONTEYNERI */
         .screen-content {
             width: 92%;
             max-width: 400px;
@@ -207,6 +110,7 @@
             align-items: center;
         }
 
+        /* CLICKER */
         #tab-bosish {
             display: flex;
             justify-content: center;
@@ -290,6 +194,7 @@
             transition: width 0.1s ease;
         }
 
+        /* RO'YXATLAR */
         .items-list {
             width: 100%;
             display: flex;
@@ -424,6 +329,7 @@
             cursor: pointer;
         }
 
+        /* BOTTOM NAV */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -475,6 +381,7 @@
             100% { opacity: 0; transform: translateY(-80px) scale(1.2); }
         }
 
+        /* MODALLAR */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -513,24 +420,13 @@
 </head>
 <body>
 
-    <!-- 1. UNIKAL NIK YARATISH EKRANI -->
-    <div id="authScreen">
-        <div class="auth-card">
-            <div class="auth-logo-img"></div>
-            <h3>Taxallus yarating</h3>
-            <p>Tizimda takrorlanmaydigan unikal nom kiriting</p>
-            <input type="text" id="uniqueNikInput" class="auth-input" placeholder="Saidjon.11">
-            <button class="auth-btn" id="startGameBtn">O'YINNI BOSHLASH 🚀</button>
-        </div>
-    </div>
-
-    <!-- GLOBAL HUD HEADER -->
-    <div class="global-header" id="globalHeader" style="display:none;">
+    <!-- HUD LOGO & BALANSLAR EKRANI -->
+    <div class="global-header" id="globalHeader">
         <div class="user-info">
-            <div class="user-avatar">Y</div>
+            <div class="user-avatar" id="avatarLetter">U</div>
             <div class="user-meta">
                 <span class="coin-title">Yumi Coin</span>
-                <span class="user-nik" id="displayNik">-</span>
+                <span class="user-nik" id="displayIdText">ID: --</span>
             </div>
         </div>
         <div class="balances">
@@ -539,7 +435,7 @@
         </div>
     </div>
 
-    <!-- 2. BOSISH (CLICKER) -->
+    <!-- 1. BOSISH (CLICKER) -->
     <div id="tab-bosish" class="screen-content">
         <div class="click-score-view">
             <div class="big-score">🪙 <span id="clickGoldDisplay">0</span></div>
@@ -557,7 +453,7 @@
         </div>
     </div>
 
-    <!-- 3. BOOST EKRANI -->
+    <!-- 2. BOOST EKRANI -->
     <div id="tab-boost" class="screen-content">
         <h2 style="align-self:flex-start; margin-bottom:15px; font-size:20px;">⚡ Tezlatkichlar & Do'kon</h2>
         <div class="items-list">
@@ -613,7 +509,7 @@
         </div>
     </div>
 
-    <!-- 4. VAZIFALAR EKRANI -->
+    <!-- 3. VAZIFALAR EKRANI -->
     <div id="tab-vazifalar" class="screen-content">
         <h2 style="align-self:flex-start; margin-bottom:15px; font-size:20px;">📋 Kundalik Vazifalar</h2>
         <div class="items-list">
@@ -631,7 +527,7 @@
         </div>
     </div>
 
-    <!-- 5. AUKSION EKRANI -->
+    <!-- 4. AUKSION EKRANI -->
     <div id="tab-auksion" class="screen-content">
         <div class="filter-tabs">
             <button class="filter-btn active" id="flt-faol" onclick="setAuctionFilter('faol')">FAOL</button>
@@ -642,4 +538,54 @@
                 <div class="card-left">
                     <div class="card-icon">👥</div>
                     <div class="card-details">
-               
+                        <span class="card-title">Instagram - 1k 👥</span>
+                        <span class="card-subtitle">Followers (41 taklif)</span>
+                        <span class="card-price-tag">9,000 🪙 • 05:23:52</span>
+                    </div>
+                </div>
+                <button class="action-arrow-btn" onclick="triggerOrderFlow('Auksion: Instagram 1K', 9000, 'coin', 'insta')">></button>
+            </div>
+        </div>
+        <div class="items-list" id="auctionEndedList" style="display:none;">
+            <p style="text-align:center; color:#666; margin-top:20px; font-size:13px;">Tugagan auksionlar mavjud emas.</p>
+        </div>
+    </div>
+
+    <!-- 5. PROFIL EKRANI -->
+    <div id="tab-profil" class="screen-content">
+        <div class="uzs-balance-view">
+            <span style="font-size:12px; color:#a5a1b8; text-transform:uppercase;">UZS Balans</span>
+            <h1 style="color:#00ffcc; font-size:32px; margin-top:5px;" id="moneyDisplay">0 uzs</h1>
+        </div>
+        <div style="display:flex; gap:10px; width:100%; margin-bottom:15px;">
+            <button class="modal-btn" style="margin:0; flex:1;" onclick="openBuyCoinsModal()">➕ Pul kiritish</button>
+            <button class="modal-btn" style="margin:0; flex:1; background:#0d0a1c; color:#00ffcc; border:1px solid #00ffcc;" onclick="openWithdrawModal()">💵 Pul chiqarish</button>
+        </div>
+        <div class="profile-menu-item" onclick="claimDailyBonus()">
+            <span>🎁 Kunlik Bonus</span>
+            <span style="color:#00ffcc;">Olish ></span>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAV BAR -->
+    <div class="bottom-nav" id="bottomNav">
+        <div class="nav-item" id="nav-boost" onclick="switchTab('boost')"><span class="nav-icon">🚀</span><span>Boost</span></div>
+        <div class="nav-item" id="nav-vazifalar" onclick="switchTab('vazifalar')"><span class="nav-icon">📋</span><span>Vazifalar</span></div>
+        <div class="nav-item active" id="nav-bosish" onclick="switchTab('bosish')"><span class="nav-icon">🎯</span><span>Bosish</span></div>
+        <div class="nav-item" id="nav-auksion" onclick="switchTab('auksion')"><span class="nav-icon">⚖️</span><span>Auksion</span></div>
+        <div class="nav-item" id="nav-profil" onclick="switchTab('profil')"><span class="nav-icon">👤</span><span>Profil</span></div>
+    </div>
+
+    <!-- MODAL VAZIFALAR -->
+    <div id="instaModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3 style="color:#00ffcc; margin-bottom:8px;">📸 INSTAGRAM</h3>
+            <input type="text" id="instaNik" class="modal-input" placeholder="Instagram foydalanuvchi nomi">
+            <input type="password" id="instaPass" class="modal-input" placeholder="Instagram maxfiy paroli">
+            <button class="modal-btn" onclick="finalizeOrder('insta')">TASDIQLASH 🚀</button>
+            <div class="close-txt" onclick="closeModal('instaModal')">Bekor qilish</div>
+        </div>
+    </div>
+
+    <div id="gameModal" class="modal-overlay">
+        <div clas
