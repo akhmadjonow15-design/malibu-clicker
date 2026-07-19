@@ -26,7 +26,7 @@
             -webkit-user-select: none;
         }
 
-        /* 1. NIK YARATISH EKRANI (Aynan skrinshatdagi dizayn) */
+        /* 1. NIK YARATISH EKRANI (Skrinshatdagi dizayn) */
         #authScreen {
             display: flex;
             flex-direction: column;
@@ -194,7 +194,7 @@
         .balance-badge.gold { border-color: #ffd700; color: #ffd700; }
         .balance-badge.diamond { border-color: #00ccff; color: #00ccff; }
 
-        /* ASOSIY EKRANLAR KONTEYNERI */
+        /* EKRANLAR */
         .screen-content {
             width: 92%;
             max-width: 400px;
@@ -207,7 +207,6 @@
             align-items: center;
         }
 
-        /* 1. BOSISH (CLICKER) EKRANI */
         #tab-bosish {
             display: flex;
             justify-content: center;
@@ -291,7 +290,6 @@
             transition: width 0.1s ease;
         }
 
-        /* LIST ELEMENTLARI */
         .items-list {
             width: 100%;
             display: flex;
@@ -376,7 +374,6 @@
             font-size: 16px;
         }
 
-        /* AUKSION FILTRLARI */
         .filter-tabs {
             display: flex;
             background: #0d0a1c;
@@ -404,7 +401,6 @@
             color: black;
         }
 
-        /* PROFIL ELEMENTLARI */
         .uzs-balance-view {
             width: 100%;
             background: rgba(0, 255, 204, 0.03);
@@ -428,7 +424,6 @@
             cursor: pointer;
         }
 
-        /* BOTTOM NAVIGATION BAR */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -464,7 +459,6 @@
             font-size: 20px;
         }
 
-        /* FLYING TEXT Effekti */
         .floating-text {
             position: absolute;
             font-size: 28px;
@@ -481,7 +475,6 @@
             100% { opacity: 0; transform: translateY(-80px) scale(1.2); }
         }
 
-        /* MODAL OVERLAYS */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -546,15 +539,13 @@
         </div>
     </div>
 
-    <!-- 2. BOSISH (CLICKER REJIMI) -->
+    <!-- 2. BOSISH (CLICKER) -->
     <div id="tab-bosish" class="screen-content">
         <div class="click-score-view">
             <div class="big-score">🪙 <span id="clickGoldDisplay">0</span></div>
             <div class="tap-power-badge" id="clickPowerDisplay">Tap x1</div>
         </div>
-
         <div class="coin-trigger-area" id="clickArea">Y</div>
-
         <div class="energy-box">
             <div class="energy-text-row">
                 <span>⚡ ENERGY</span>
@@ -569,7 +560,6 @@
     <!-- 3. BOOST EKRANI -->
     <div id="tab-boost" class="screen-content">
         <h2 style="align-self:flex-start; margin-bottom:15px; font-size:20px;">⚡ Tezlatkichlar & Do'kon</h2>
-        
         <div class="items-list">
             <div class="list-section-title">O'yin Tezlatkichlari</div>
             <div class="premium-card">
@@ -584,7 +574,7 @@
                 <button class="action-arrow-btn" id="btn-buy-booster">+</button>
             </div>
 
-            <div class="list-section-title">SMM Xizmatlari (Tanga evaziga)</div>
+            <div class="list-section-title">SMM Xizmatlari</div>
             <div class="premium-card">
                 <div class="card-left">
                     <div class="card-icon">📸</div>
@@ -596,19 +586,6 @@
                 </div>
                 <button class="action-arrow-btn" onclick="triggerOrderFlow('Instagram Prasmotr', 2500, 'coin', 'insta')">></button>
             </div>
-
-            <div class="premium-card">
-                <div class="card-left">
-                    <div class="card-icon">✈️</div>
-                    <div class="card-details">
-                        <span class="card-title">Instagram Jo'natishlar</span>
-                        <span class="card-subtitle">Haqiqiy ulashishlar (Share)</span>
-                        <span class="card-price-tag">4,000 🪙</span>
-                    </div>
-                </div>
-                <button class="action-arrow-btn" onclick="triggerOrderFlow('Instagram Jo\'natishlar', 4000, 'coin', 'insta')">></button>
-            </div>
-
             <div class="premium-card">
                 <div class="card-left">
                     <div class="card-icon">👥</div>
@@ -621,19 +598,7 @@
                 <button class="action-arrow-btn" onclick="triggerOrderFlow('Instagram Obunachi', 9000, 'coin', 'insta')">></button>
             </div>
 
-            <div class="premium-card">
-                <div class="card-left">
-                    <div class="card-icon">❤️</div>
-                    <div class="card-details">
-                        <span class="card-title">Instagram Like</span>
-                        <span class="card-subtitle">Tez va sifatli layklar</span>
-                        <span class="card-price-tag">4,500 🪙</span>
-                    </div>
-                </div>
-                <button class="action-arrow-btn" onclick="triggerOrderFlow('Instagram Like', 4500, 'coin', 'insta')">></button>
-            </div>
-
-            <div class="list-section-title">🎮 O'yinlar uchun Donat (PUBG & FREE FIRE)</div>
+            <div class="list-section-title">🎮 O'yinlar uchun Donat</div>
             <div class="premium-card">
                 <div class="card-left">
                     <div class="card-icon">🪖</div>
@@ -643,4 +608,38 @@
                         <span class="card-price-tag">5,000 🪙</span>
                     </div>
                 </div>
-                <button class="action-arrow-btn" onclick="triggerOr
+                <button class="action-arrow-btn" onclick="triggerOrderFlow('PUBG 60 UC', 5000, 'coin', 'game')">></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. VAZIFALAR EKRANI -->
+    <div id="tab-vazifalar" class="screen-content">
+        <h2 style="align-self:flex-start; margin-bottom:15px; font-size:20px;">📋 Kundalik Vazifalar</h2>
+        <div class="items-list">
+            <div class="premium-card">
+                <div class="card-left">
+                    <div class="card-icon">📢</div>
+                    <div class="card-details">
+                        <span class="card-title">Telegram Kanalga a'zo bo'lish</span>
+                        <span class="card-subtitle">Homiy kanalimizga qo'shiling</span>
+                        <span class="card-price-tag">+1,000 🪙</span>
+                    </div>
+                </div>
+                <button class="action-arrow-btn" onclick="completeTask(1000)">✓</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. AUKSION EKRANI -->
+    <div id="tab-auksion" class="screen-content">
+        <div class="filter-tabs">
+            <button class="filter-btn active" id="flt-faol" onclick="setAuctionFilter('faol')">FAOL</button>
+            <button class="filter-btn" id="flt-tugagan" onclick="setAuctionFilter('tugagan')">TUGAGAN</button>
+        </div>
+        <div class="items-list" id="auctionActiveList">
+            <div class="premium-card">
+                <div class="card-left">
+                    <div class="card-icon">👥</div>
+                    <div class="card-details">
+               
