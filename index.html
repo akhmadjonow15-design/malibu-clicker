@@ -26,9 +26,9 @@
             -webkit-user-select: none;
         }
 
-        /* NIK YARATISH EKRANI (FAQAT BIRINCHI MARTA) */
+        /* 1. NIK YARATISH EKRANI */
         #authScreen {
-            display: flex;
+            display: flex; /* Boshida ochiq turadi */
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -102,9 +102,9 @@
             margin-top: 8px;
         }
 
-        /* ASOSIY O'YIN EKRANI */
+        /* 2. ASOSIY O'YIN EKRANI */
         #gameScreen {
-            display: none;
+            display: none; /* Boshida yopiq, nik kiritilgach ochiladi */
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
@@ -250,7 +250,7 @@
             color: black;
         }
 
-        /* FLYING TEXT Effekti */
+        /* FLYING TEXT */
         .floating-text {
             position: absolute;
             font-size: 28px;
@@ -289,10 +289,7 @@
             box-shadow: 0 0 25px rgba(220, 39, 67, 0.2);
         }
 
-        .modal-card.success-border { border-color: #00ffcc; box-shadow: 0 0 25px rgba(0, 255, 204, 0.2); }
         .modal-card h3 { margin-bottom: 12px; font-size: 18px; color: #dc2743; }
-        .modal-card.success-border h3 { color: #00ffcc; }
-
         .modal-input {
             width: 100%; padding: 12px; margin-bottom: 12px;
             border-radius: 10px; border: 1px solid #444;
@@ -317,8 +314,8 @@
 </head>
 <body>
 
-    <!-- 1. UNIKAL NIK YARATISH EKRANI (FAQAT ILK BOR KIRGANDA CHIQADI) -->
-    <div id="authScreen" style="display: none;">
+    <!-- 1. NIK YARATISH EKRANI -->
+    <div id="authScreen">
         <div class="auth-card">
             <div class="auth-logo">🕹</div>
             <div class="auth-title">Taxallus yarating</div>
@@ -328,7 +325,7 @@
         </div>
     </div>
 
-    <!-- 2. ASOSIY PANЕL -->
+    <!-- 2. ASOSIY O'YIN EKRANI -->
     <div id="gameScreen">
         <div class="top-bar">
             <span class="nickname-text" id="displayNik" onclick="tryOpenAdmin()">Nik: -</span>
@@ -348,7 +345,7 @@
 
         <!-- DO'KON -->
         <div class="shop-container">
-            <!-- 💸 ALMOSNI PULGA SOTISH -->
+            <!-- Almosni Pulga sotish -->
             <div class="shop-item" style="border: 1px solid #ffcc00; background: rgba(255,204,0,0.05);">
                 <div class="item-details">
                     <div class="item-title" style="color: #ffcc00;">💸 Almosni Pulga sotish</div>
@@ -357,7 +354,7 @@
                 <button class="buy-btn money" onclick="convertDiamondsToMoney()">ALMASHTIRISH</button>
             </div>
 
-            <!-- 安排 PULNI YECHISH -->
+            <!-- Pulni yechish -->
             <div class="shop-item" style="border: 1px solid #00ffcc; background: rgba(0,255,204,0.05);">
                 <div class="item-details">
                     <div class="item-title" style="color: #00ffcc;">💳 Pulni yechib olish</div>
@@ -366,11 +363,11 @@
                 <button class="buy-btn" style="background:#00ffcc; color:black;" onclick="openWithdrawModal()">YECHISH</button>
             </div>
 
-            <!-- SMM xizmatlar -->
+            <!-- SMM Xizmatlar -->
             <div class="shop-item">
                 <div class="item-details">
                     <div class="item-title">👀 1000 ta Prasmotr</div>
-                    <div class="item-desc">Instagram video ko'rishlar soni</div>
+                    <div class="item-desc">Instagram video ko'rishlar</div>
                 </div>
                 <button class="buy-btn" onclick="triggerOrderFlow('1000 ta Prasmotr', 2500, 'free')">2500 💎</button>
             </div>
@@ -394,7 +391,7 @@
             <div class="shop-item">
                 <div class="item-details">
                     <div class="item-title">✅ Moviy Galochka (1 oy)</div>
-                    <div class="item-desc">Profilga rasmiy ko'k belgi qo'yish</div>
+                    <div class="item-desc">Profilga rasmiy ko'k belgi</div>
                 </div>
                 <button class="buy-btn premium" onclick="triggerOrderFlow('1 oylik Galochka (10 000 so\'m)', 0, 'premium')">10 000 UZS</button>
             </div>
@@ -402,14 +399,14 @@
             <div class="shop-item">
                 <div class="item-details">
                     <div class="item-title">⚡️ Tezlatkich (Klik +1)</div>
-                    <div class="item-desc">Tanganing ko'payishini tezlashtiradi</div>
+                    <div class="item-desc">Klik kuchini oshiradi</div>
                 </div>
                 <button class="buy-btn" id="boosterBtn" onclick="buyBooster()">150 💎</button>
             </div>
         </div>
     </div>
 
-    <!-- 3. BUYURTMA BERISHDA INSTA NIK VA PAROL SO'RASH MODALI -->
+    <!-- MODAL: INSTAGRAM MA'LUMOTLARI -->
     <div id="orderModal" class="modal-overlay">
         <div class="modal-card">
             <h3>📸 INSTAGRAM MA'LUMOTLARI</h3>
@@ -421,7 +418,7 @@
         </div>
     </div>
 
-    <!-- 4. PUL YECHISH MODALI -->
+    <!-- MODAL: PUL YECHISH -->
     <div id="withdrawModal" class="modal-overlay">
         <div class="modal-card" style="border-color:#00ffcc;">
             <h3 style="color:#00ffcc;">💳 PULNI YECHIB OLISH</h3>
@@ -434,7 +431,7 @@
         </div>
     </div>
 
-    <!-- 5. MAXFIY ADMIN PANEL -->
+    <!-- MODAL: MAXFIY ADMIN PANEL -->
     <div id="adminModal" class="modal-overlay">
         <div class="modal-card">
             <h3>🛠 MAXFIY ADMIN PANEL</h3>
@@ -443,13 +440,13 @@
                 <button class="modal-btn" onclick="checkAdminPassword()">KIRISH</button>
             </div>
             <div id="adminControlsSection" style="display: none;">
-                <p style="font-size:11px; color:#fff; font-weight:bold; margin-bottom:4px;">KIRGAN AKKAUNTLAR & LOGLAR:</p>
+                <p style="font-size:11px; color:#fff; font-weight:bold; margin-bottom:4px;">LOGLAR:</p>
                 <div class="admin-logs" id="adminLogsContainer"></div>
                 <button class="modal-btn" style="background:#bc1888; color:white; padding:8px; font-size:11px; margin-bottom:10px;" onclick="clearLogs()">LOGLARNI TOZALASH</button>
                 
-                <p style="font-size:11px; color:#fff; font-weight:bold; margin-bottom:4px;">FOYDALANUVCHILARGA RASSILKA</p>
+                <p style="font-size:11px; color:#fff; font-weight:bold; margin-bottom:4px;">RASSILKA</p>
                 <textarea id="rassilkaText" class="modal-input" style="height:60px; text-align:left; resize:none;" placeholder="Xabar matni..."></textarea>
-                <button class="modal-btn" onclick="sendRassilka()">HAMMAGA XABAR YUBORISH 📢</button>
+                <button class="modal-btn" onclick="sendRassilka()">HAMMAGA YUBORISH 📢</button>
             </div>
             <div class="close-modal" onclick="closeModal('adminModal')">Yopish</div>
         </div>
@@ -468,14 +465,12 @@
 
         const keyPrefix = `smm_${userId}_`;
 
-        // O'yin ma'lumotlari
         let myUniqueNik = localStorage.getItem(keyPrefix + 'unique_nik') || "";
         let score = parseInt(localStorage.getItem(keyPrefix + 'score')) || 0;
         let moneyBalance = parseInt(localStorage.getItem(keyPrefix + 'money_balance')) || 0;
         let clickPower = parseInt(localStorage.getItem(keyPrefix + 'click_power')) || 1;
         let boosterCost = parseInt(localStorage.getItem(keyPrefix + 'booster_cost')) || 150;
 
-        // Vaqtinchalik buyurtma ma'lumotlari xotirasi
         let pendingOrder = { serviceName: '', cost: 0, type: '' };
 
         const authScreen = document.getElementById('authScreen');
@@ -488,34 +483,45 @@
         const boosterBtn = document.getElementById('boosterBtn');
         const adminLogsContainer = document.getElementById('adminLogsContainer');
 
-        // Tekshirish: Agar foydalanuvchi nik yaratgan bo'lsa srazu panel ochiladi, yaratmagan bo'lsa ro'yxatdan o'tish ekrani chiqadi
-        if (myUniqueNik) {
-            initDashboard();
-        } else {
-            gameScreen.style.display = 'none';
-            authScreen.style.display = 'flex';
-        }
+        // EKRANLARNI TO'G'RI BOShQARISh (QORA EKRAN XATOSINI TUZATISh)
+        window.onload = function() {
+            if (myUniqueNik) {
+                authScreen.style.display = 'none';
+                gameScreen.style.display = 'flex';
+                displayNik.textContent = `Nik: ${myUniqueNik}`;
+                updateUI();
+            } else {
+                authScreen.style.display = 'flex';
+                gameScreen.style.display = 'none';
+            }
+        };
 
-        // UNIKAL NIKNI RO'YXATDAN O'TKAZISH
         function registerUniqueNik() {
             const inputNik = document.getElementById('uniqueNikInput').value.trim().toLowerCase();
             if(!inputNik) { alert("Nik yozing!"); return; }
-            if(inputNik.length < 3) { alert("Nik kamida 3 ta harfdan iborat bo'lsin!"); return; }
+            if(inputNik.length < 3) { alert("Nik kamida 3 ta harf bo'lsin!"); return; }
 
-            // Global ro'yxatdan bu nikni boshqa birov band qilganmi yoki yo'qligini tekshirish
             let globalNikList = [];
             try {
                 globalNikList = JSON.parse(localStorage.getItem('global_registered_niks')) || [];
             } catch(e) { globalNikList = []; }
 
             if(globalNikList.includes(inputNik)) {
-                alert("❌ Kechirasiz, bu nik allaqachon band! Boshqa nik yozing.");
+                alert("❌ Bu nik band! Boshqa nik kiriting.");
                 return;
             }
 
-            // Nikni tasdiqlash va saqlash
             globalNikList.push(inputNik);
             localStorage.setItem('global_registered_niks', JSON.stringify(globalNikList));
             
             myUniqueNik = inputNik;
-            localStorage.setItem(keyPre
+            localStorage.setItem(keyPrefix + 'unique_nik', myUniqueNik);
+
+            let usersList = [];
+            try { usersList = JSON.parse(localStorage.getItem('smm_global_users')) || []; } catch(e){}
+            if(!usersList.includes(String(userId))) {
+                usersList.push(String(userId));
+                localStorage.setItem('smm_global_users', JSON.stringify(usersList));
+            }
+
+            authScreen.style.displa
