@@ -2,90 +2,232 @@
 <html lang="uz">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mening Profilim</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Malibu Clicker</title>
   <style>
-    :root {
-      --bg: #0f172a;
-      --card-bg: #1e293b;
-      --text: #f8fafc;
-      --accent: #38bdf8;
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
+      padding: 0;
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .header {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .score-container {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #facc15;
+      text-shadow: 0 0 20px rgba(250, 204, 21, 0.4);
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      letter-spacing: 1px;
+    }
+
+    .game-area {
+      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-    }
-
-    .card {
-      background-color: var(--card-bg);
-      padding: 2.5rem;
-      border-radius: 16px;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-      text-align: center;
-      max-width: 350px;
-      width: 90%;
-      border: 1px solid #334155;
-    }
-
-    .avatar {
-      width: 96px;
-      height: 96px;
-      border-radius: 50%;
-      border: 3px solid var(--accent);
-      margin-bottom: 1rem;
-    }
-
-    h1 {
-      margin: 0 0 0.5rem 0;
-      font-size: 1.5rem;
-    }
-
-    p {
-      color: #94a3b8;
-      margin: 0 0 1.5rem 0;
-      font-size: 0.95rem;
-    }
-
-    .btn {
-      display: inline-block;
       width: 100%;
-      padding: 0.75rem 0;
-      background-color: var(--accent);
-      color: #0f172a;
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 8px;
-      transition: opacity 0.2s;
-      border: none;
-      cursor: pointer;
+      max-width: 380px;
+      height: 300px;
     }
 
-    .btn:hover {
-      opacity: 0.9;
+    .malibu-card {
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(56,189,248,0.2) 0%, rgba(0,0,0,0) 70%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.05s ease;
+    }
+
+    .malibu-card:active {
+      transform: scale(0.93);
+    }
+
+    .malibu-img {
+      width: 220px;
+      filter: drop-shadow(0 15px 15px rgba(0,0,0,0.6));
+      pointer-events: none;
+    }
+
+    /* Bochka bosilganda chiquvchi +1 matni */
+    .floating-text {
+      position: absolute;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #38bdf8;
+      pointer-events: none;
+      animation: floatUp 0.8s ease-out forwards;
+      z-index: 10;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-80px) scale(1.3);
+      }
+    }
+
+    .controls {
+      width: 90%;
+      max-width: 400px;
+      margin-bottom: 30px;
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(10px);
+      padding: 15px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .upgrade-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(90deg, #0284c7, #2563eb);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      transition: opacity 0.2s;
+    }
+
+    .upgrade-btn:disabled {
+      background: #475569;
+      opacity: 0.5;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: #cbd5e1;
     }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <img class="avatar" src="https://api.dicebear.com/7.x/bottts/svg?seed=Developer" alt="Avatar">
-    <h1>Ismingizni Yozing</h1>
-    <p>Frontend / Backend Dasturchi</p>
-    <button class="btn" onclick="sayHello()">Aloqa</button>
+  <div class="header">
+    <div class="subtitle">MALIBU COINS</div>
+    <div class="score-container" id="score">0</div>
+  </div>
+
+  <div class="game-area">
+    <div class="malibu-card" id="clickArea">
+      <!-- Sport car SVG rasmi -->
+      <svg class="malibu-img" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.3.9L2.3 11.2C2.1 11.7 2 12.2 2 12.7V16c0 .6.4 1 1 1h2" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="7" cy="17" r="2" stroke="#facc15" stroke-width="1.5"/>
+        <circle cx="17" cy="17" r="2" stroke="#facc15" stroke-width="1.5"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="upgrade-btn" id="upgradeBtn">
+      <span>⚡ Avto-Turbo</span>
+      <span id="upgradeCost">100 coin</span>
+    </button>
+    <div class="stats">
+      <span>Sekundiga: <b id="cps">0</b></span>
+      <span>Bosish kuchi: <b>+1</b></span>
+    </div>
   </div>
 
   <script>
-    function sayHello() {
-      alert("Xabar yuborildi! Tez orada bog'lanaman.");
+    let score = 0;
+    let autoClickers = 0;
+    let upgradeCost = 100;
+
+    const scoreEl = document.getElementById('score');
+    const clickArea = document.getElementById('clickArea');
+    const upgradeBtn = document.getElementById('upgradeBtn');
+    const upgradeCostEl = document.getElementById('upgradeCost');
+    const cpsEl = document.getElementById('cps');
+
+    // Bosganda ishlovchi funksiya
+    clickArea.addEventListener('pointerdown', (e) => {
+      score++;
+      updateUI();
+      createFloatingText(e.clientX, e.clientY);
+    });
+
+    // Uchar +1 matnini yaratish
+    function createFloatingText(x, y) {
+      const text = document.createElement('div');
+      text.className = 'floating-text';
+      text.innerText = '+1';
+      text.style.left = `${x - 15}px`;
+      text.style.top = `${y - 30}px`;
+      
+      document.body.appendChild(text);
+
+      setTimeout(() => {
+        text.remove();
+      }, 800);
+    }
+
+    // Kuchaytirish (Upgrade) sotib olish
+    upgradeBtn.addEventListener('click', () => {
+      if (score >= upgradeCost) {
+        score -= upgradeCost;
+        autoClickers++;
+        upgradeCost = Math.floor(upgradeCost * 1.5);
+        updateUI();
+      }
+    });
+
+    // Avto-kliker (Har sekundda coin qo'shish)
+    setInterval(() => {
+      if (autoClickers > 0) {
+        score += autoClickers;
+        updateUI();
+      }
+    }, 1000);
+
+    // Ekranni yangilash
+    function updateUI() {
+      scoreEl.innerText = score.toLocaleString();
+      cpsEl.innerText = autoClickers;
+      upgradeCostEl.innerText = `${upgradeCost.toLocaleString()} coin`;
+      upgradeBtn.disabled = score < upgradeCost;
     }
   </script>
-
 </body>
 </html>
