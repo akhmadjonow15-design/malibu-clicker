@@ -2,232 +2,149 @@
 <html lang="uz">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Malibu Clicker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saidjon Ahmadjonov | Portfolio</title>
   <style>
-    * {
-      box-sizing: border-box;
-      user-select: none;
-      -webkit-user-select: none;
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --subtext: #94a3b8;
+      --accent: #38bdf8;
+      --border: #334155;
     }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-      color: #ffffff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 100vh;
-      overflow: hidden;
+      justify-content: center;
+      padding: 2rem 1rem;
     }
 
-    .header {
-      margin-top: 20px;
+    .container {
+      max-width: 650px;
+      width: 100%;
+    }
+
+    .profile-card {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 20px;
+      border: 1px solid var(--border);
       text-align: center;
+      margin-bottom: 2rem;
     }
 
-    .score-container {
-      font-size: 2.8rem;
-      font-weight: 800;
-      color: #facc15;
-      text-shadow: 0 0 20px rgba(250, 204, 21, 0.4);
-    }
-
-    .subtitle {
-      font-size: 0.9rem;
-      color: #94a3b8;
-      letter-spacing: 1px;
-    }
-
-    .game-area {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      max-width: 380px;
-      height: 300px;
-    }
-
-    .malibu-card {
-      width: 260px;
-      height: 260px;
+    .avatar {
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(56,189,248,0.2) 0%, rgba(0,0,0,0) 70%);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      transition: transform 0.05s ease;
+      border: 3px solid var(--accent);
+      margin-bottom: 1rem;
     }
 
-    .malibu-card:active {
-      transform: scale(0.93);
+    h1 { font-size: 1.8rem; margin-bottom: 0.3rem; }
+    .subtitle { color: var(--accent); font-weight: 600; margin-bottom: 1rem; }
+    .bio { color: var(--subtext); font-size: 0.95rem; line-height: 1.5; }
+
+    .section-title {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--accent);
+      padding-left: 0.5rem;
     }
 
-    .malibu-img {
-      width: 220px;
-      filter: drop-shadow(0 15px 15px rgba(0,0,0,0.6));
-      pointer-events: none;
+    .projects {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 2rem;
     }
 
-    /* Bochka bosilganda chiquvchi +1 matni */
-    .floating-text {
-      position: absolute;
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #38bdf8;
-      pointer-events: none;
-      animation: floatUp 0.8s ease-out forwards;
-      z-index: 10;
-    }
-
-    @keyframes floatUp {
-      0% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: translateY(-80px) scale(1.3);
-      }
-    }
-
-    .controls {
-      width: 90%;
-      max-width: 400px;
-      margin-bottom: 30px;
-      background: rgba(30, 41, 59, 0.7);
-      backdrop-filter: blur(10px);
-      padding: 15px;
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .upgrade-btn {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(90deg, #0284c7, #2563eb);
-      color: white;
-      border: none;
+    .project-card {
+      background: var(--card-bg);
+      padding: 1.2rem;
       border-radius: 12px;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
+      border: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    .project-info h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
+    .project-info p { color: var(--subtext); font-size: 0.85rem; }
+
+    .btn {
+      padding: 0.6rem 1.2rem;
+      background: var(--accent);
+      color: #0f172a;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 8px;
+      font-size: 0.85rem;
       transition: opacity 0.2s;
     }
 
-    .upgrade-btn:disabled {
-      background: #475569;
-      opacity: 0.5;
-      cursor: not-allowed;
-      box-shadow: none;
+    .btn:hover { opacity: 0.85; }
+
+    .socials {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
     }
 
-    .stats {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 10px;
-      font-size: 0.85rem;
-      color: #cbd5e1;
+    .social-btn {
+      flex: 1;
+      text-align: center;
+      padding: 0.8rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: border-color 0.2s;
     }
+
+    .social-btn:hover { border-color: var(--accent); }
   </style>
 </head>
 <body>
 
-  <div class="header">
-    <div class="subtitle">MALIBU COINS</div>
-    <div class="score-container" id="score">0</div>
-  </div>
-
-  <div class="game-area">
-    <div class="malibu-card" id="clickArea">
-      <!-- Sport car SVG rasmi -->
-      <svg class="malibu-img" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.3.9L2.3 11.2C2.1 11.7 2 12.2 2 12.7V16c0 .6.4 1 1 1h2" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
-        <circle cx="7" cy="17" r="2" stroke="#facc15" stroke-width="1.5"/>
-        <circle cx="17" cy="17" r="2" stroke="#facc15" stroke-width="1.5"/>
-      </svg>
+  <div class="container">
+    
+    <!-- Profil Qismi -->
+    <div class="profile-card">
+      <img class="avatar" src="https://api.dicebear.com/7.x/bottts/svg?seed=Saidjon" alt="Saidjon">
+      <h1>Saidjon Ahmadjonov</h1>
+      <div class="subtitle">Developer & Creator</div>
+      <p class="bio">
+        Python (Telegram Botlar) va Web dasturlash bo'yicha loyihalar yarataman. Interaktiv kliker o'yinlar va qulay raqamli yechimlar ustida ishlayman.
+      </p>
     </div>
-  </div>
 
-  <div class="controls">
-    <button class="upgrade-btn" id="upgradeBtn">
-      <span>⚡ Avto-Turbo</span>
-      <span id="upgradeCost">100 coin</span>
-    </button>
-    <div class="stats">
-      <span>Sekundiga: <b id="cps">0</b></span>
-      <span>Bosish kuchi: <b>+1</b></span>
+    <!-- Loyihalar -->
+    <h2 class="section-title">🚀 Loyihalar</h2>
+    <div class="projects">
+      <div class="project-card">
+        <div class="project-info">
+          <h3>Malibu Clicker</h3>
+          <p>HTML/CSS/JS texnologiyasida yaratilgan interaktiv kliker o'yin.</p>
+        </div>
+        <a href="https://akhmadjonow15-design.github.io/malibu-clicker/" class="btn" target="_blank">O'ynash</a>
+      </div>
     </div>
+
+    <!-- Bog'lanish -->
+    <h2 class="section-title">🌐 Tarmoqlar</h2>
+    <div class="socials">
+      <a href="https://github.com/akhmadjonow15-design" class="social-btn" target="_blank">GitHub Profile</a>
+    </div>
+
   </div>
 
-  <script>
-    let score = 0;
-    let autoClickers = 0;
-    let upgradeCost = 100;
-
-    const scoreEl = document.getElementById('score');
-    const clickArea = document.getElementById('clickArea');
-    const upgradeBtn = document.getElementById('upgradeBtn');
-    const upgradeCostEl = document.getElementById('upgradeCost');
-    const cpsEl = document.getElementById('cps');
-
-    // Bosganda ishlovchi funksiya
-    clickArea.addEventListener('pointerdown', (e) => {
-      score++;
-      updateUI();
-      createFloatingText(e.clientX, e.clientY);
-    });
-
-    // Uchar +1 matnini yaratish
-    function createFloatingText(x, y) {
-      const text = document.createElement('div');
-      text.className = 'floating-text';
-      text.innerText = '+1';
-      text.style.left = `${x - 15}px`;
-      text.style.top = `${y - 30}px`;
-      
-      document.body.appendChild(text);
-
-      setTimeout(() => {
-        text.remove();
-      }, 800);
-    }
-
-    // Kuchaytirish (Upgrade) sotib olish
-    upgradeBtn.addEventListener('click', () => {
-      if (score >= upgradeCost) {
-        score -= upgradeCost;
-        autoClickers++;
-        upgradeCost = Math.floor(upgradeCost * 1.5);
-        updateUI();
-      }
-    });
-
-    // Avto-kliker (Har sekundda coin qo'shish)
-    setInterval(() => {
-      if (autoClickers > 0) {
-        score += autoClickers;
-        updateUI();
-      }
-    }, 1000);
-
-    // Ekranni yangilash
-    function updateUI() {
-      scoreEl.innerText = score.toLocaleString();
-      cpsEl.innerText = autoClickers;
-      upgradeCostEl.innerText = `${upgradeCost.toLocaleString()} coin`;
-      upgradeBtn.disabled = score < upgradeCost;
-    }
-  </script>
 </body>
 </html>
