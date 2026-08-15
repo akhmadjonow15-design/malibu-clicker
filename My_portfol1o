@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saidjon Ahmadjonov | Official Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: #080c14;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 10px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            border-radius: 24px;
+            padding: 30px 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .profile-img-box {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px auto;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #00d2ff;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            background: linear-gradient(to right, #00d2ff, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bio {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 22px;
+        }
+
+        .section-title {
+            font-size: 12px;
+            margin: 20px 0 12px 0;
+            text-align: left;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #64748b;
+            font-weight: 700;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 15px;
+            transition: transform 0.2s, filter 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.2);
+        }
+
+        .btn-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* YORQIN RANGLI TUGMALAR */
+        .btn-about   { background: linear-gradient(135deg, #ff9900, #ff5500); } /* Tilla/Olovrang */
+        .btn-profile { background: linear-gradient(135deg, #0088cc, #005580); } /* Telegram Ko'k */
+        .btn-channel { background: linear-gradient(135deg, #9333ea, #4c1d95); } /* Yoritilgan Siyohrang */
+        .btn-bots    { background: linear-gradient(135deg, #475569, #1e293b); opacity: 0.7; } /* Nofaol Kulrang */
+        .btn-group   { background: linear-gradient(135deg, #475569, #1e293b); opacity: 0.7; } /* Nofaol Kulrang */
+        .btn-work    { background: linear-gradient(135deg, #10b981, #047857); } /* Zumrad Yashil */
+
+        .status-tag {
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .details-box {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px dashed rgba(0, 210, 255, 0.4);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: left;
+            font-size: 13px;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #1e293b;
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+            text-align: left;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 15px;
+            font-size: 20px;
+            color: #94a3b8;
+            cursor: pointer;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="profile-img-box">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=400&auto=format&fit=crop" alt="Coder" class="profile-img">
+        </div>
+        
+        <h1>Saidjon Ahmadjonov</h1>
+        <p class="bio"><i class="fa-solid fa-code"></i> Senior Coder (Python3 & PHP)</p>
+
+        <!-- MEN HAQIMDA TUGMASI -->
+        <button class="btn btn-about" onclick="openModal()">
+            <div class="btn-content">
+                <i class="fa-solid fa-user-astronaut"></i>
+                <span>MEN HAQIMDA</span>
+            </div>
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <div class="section-title">Telegram Tarmoqlari</div>
+        
+        <!-- TELEGRAM PROFIL -->
+        <a href="https://t.me/MEXA_proo" target="_blank" class="btn btn-profile">
+            <div class="btn-content">
+                <i class="fa-paper-plane fa-solid"></i>
+                <span>TG PROFILIM</span>
+            </div>
+            <span class="status-tag">@MEXA_proo</span>
+        </a>
+
+        <!-- TELEGRAM KANAL -->
+        <a href="https://t.me/myportfol1a" target="_blank" class="btn btn-channel">
+            <div class="btn-content">
+                <i class="fa-solid fa-bullhorn"></i>
+                <span>TG KANALIM</span>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+
+        <!-- BOTLAR (NOFAOL) -->
+        <div class="btn btn-bots">
+            <div class="btn-content">
+                <i class="fa-solid fa-robot"></i>
+                <span>TG BOTLARIM</span>
+            </div>
+            <span class="status-tag" style="color: #fca5a5;">NOFAOL</span>
+        </div>
+
+        <!-- GURUH (YO'Q) -->
+        <div class="btn btn-group">
+            <div class="btn-content">
+                <i class="fa-solid fa-users"></i>
+                <span>TG GURUHIM</span>
+            </div>
+            <span class="status-tag" style="color: #cbd5e1;">YO'Q</span>
+        </div>
+
+        <div class="section-title">Loyihalar</div>
+
+        <!-- PORTFOLIO / ISHLAR -->
+        <a href="https://github.com/akhmadjonov15-design" target="_blank" class="btn btn-work">
+            <div class="btn-content">
+                <i class="fa-solid fa-laptop-code"></i>
+                <span>PORTFOLIO VA SAYTLARIM</span>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+
+        <!-- BATAFSIL BO'LIMI -->
+        <div class="details-box">
+            <strong style="color: #00d2ff;">BATAFSIL:</strong><br>
+            Rasmiy Telegram kanalim: <b><a href="https://t.me/myportfol1a" target="_blank" style="color: #00d2ff; text-decoration: none;">@myportfol1a</a></b><br>
+            Ushbu kanalda barcha yangi loyihalarim, eksklyuziv skriptlar, web-saytlar va dasturlash kodlarini joylab boraman.
+        </div>
+
+        <footer>
+            © 2026 Saidjon Ahmadjonov
+        </footer>
+    </div>
+
+    <!-- MODAL OYNASI -->
+    <div class="modal" id="aboutModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h3 style="color: #ff9900; margin-bottom: 12px;"><i class="fa-solid fa-crown"></i> Men Haqimda</h3>
+            <p style="font-size: 14px; line-height: 1.6; color: #cbd5e1;">
+                Men <b>Saidjon Ahmadjonov</b>, 2011-yilda tugʻilganman.<br><br>
+                Dasturlash sohasida <b>3 yillik tajribaga</b> egaman. <b>Python3</b> va <b>PHP</b> dasturlash tillarida mukammal darajada kod yozadigan Senior Coder'man.<br><br>
+                Shu vaqtgacha minglab muvaffaqiyatli loyihalar hamda minglab shogirdlarga dasturlashni oʻrgatib kelmoqdaman.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function openModal() { document.getElementById('aboutModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('aboutModal').style.display = 'none'; }
+        window.onclick = function(e) { if (e.target == document.getElementById('aboutModal')) closeModal(); }
+    </script>
+</body>
+</html>
